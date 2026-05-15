@@ -1,0 +1,91 @@
+.document-section-heading {
+  margin: 0;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  text-align: left;
+}
+
+.document-subsection-heading {
+  margin: 2.35rem 0 0.75rem;
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.document-eyebrow {
+  margin-top: 3rem;
+  margin-bottom: 1.2rem;
+  color: var(--ink);
+  font-size: 0.96rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+.document-eyebrow,
+.document-eyebrow[class] {
+  text-transform: uppercase;
+}
+
+.document-body {
+  margin: 1.5rem 0 0;
+  color: #54514b;
+  font-size: 1.08rem;
+  line-height: 2;
+}
+
+.document-serif-statement {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Georgia Pro", "Georgia", "Times New Roman", serif;
+  font-size: 1.8rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+.document-list {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.document-list li {
+  margin: 0;
+  padding-left: 0;
+  color: #54514b;
+  font-size: 1.08rem;
+  line-height: 2;
+}
+
+.document-quote {
+  margin: 1.5rem 0 0;
+  padding-left: 1.75rem;
+  border-left: 2px solid #c9c6be;
+  color: var(--ink);
+  font-family: "Baskerville", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: 2rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 640px) {
+  .page-section>.document-section-heading {
+    position: sticky;
+    top: calc(var(--header-height) + 1.5rem);
+    align-self: start;
+  }
+
+  .page-section>.document-section-heading+.document-eyebrow,
+  .page-section>.document-section-heading+*>.document-eyebrow:first-child,
+  .page-section>.document-section-heading+*>*:first-child>.document-eyebrow:first-child,
+  .section-flow>.document-section-heading+.document-eyebrow,
+  .overview-copy>.document-section-heading+.document-eyebrow {
+    margin-top: 1.12rem;
+  }
+}

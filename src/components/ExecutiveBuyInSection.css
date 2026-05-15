@@ -1,0 +1,29 @@
+.executive-buy-in-flow {
+  gap: 0.5rem;
+}
+
+.executive-buy-in-block .document-list,
+.executive-buy-in-block .document-quote {
+  margin-top: 0;
+}
+
+.executive-buy-in-result .document-quote {
+  max-width: 26rem;
+}
+
+@media (min-width: 640px) {
+  .executive-buy-in-section {
+    display: grid;
+    grid-template-columns: var(--section-title-col) var(--section-content-col);
+    column-gap: var(--section-col-gap);
+    align-items: start;
+  }
+
+  .executive-buy-in-section > .document-section-heading {
+    grid-column: 1;
+  }
+
+  .executive-buy-in-flow {
+    grid-column: 2;
+  }
+}

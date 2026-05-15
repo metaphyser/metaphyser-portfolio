@@ -1,0 +1,26 @@
+.page-section {
+  padding: 4rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.page-section-default {
+  padding-block: 4rem;
+}
+
+.page-section-compact {
+  padding-block: 4.5rem;
+}
+
+@media (min-width: 640px) {
+  .page-section {
+    padding-top: 6rem;
+  }
+
+  .page-section-default {
+    padding-top: 6rem;
+  }
+
+  .page-section-compact {
+    padding-top: 6rem;
+  }
+}

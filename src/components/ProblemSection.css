@@ -1,0 +1,84 @@
+.document>.problem-section {
+  max-width: none;
+}
+
+.problem-section {
+  border: 0;
+}
+
+.problem-brief,
+.problem-reframe {
+  max-width: 36rem;
+  margin: 0;
+}
+
+.problem-subtitle {
+  color: var(--ink);
+}
+
+.problem-grid {
+  display: grid;
+  gap: 0.15rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.problem-grid::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  bottom: -2.2rem;
+  width: 1px;
+  background: #ddd8cf;
+}
+
+.problem-panel {
+  padding: 0;
+  position: relative;
+}
+
+.problem-panel::before {
+  content: "";
+  position: absolute;
+  left: -1.1rem;
+  top: 0.75rem;
+  width: 0.65rem;
+  height: 1px;
+  background: #ddd8cf;
+}
+
+.problem-points {
+  margin: 0.15rem 0 0;
+}
+
+.problem-points li {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.problem-points .document-body {
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .problem-section {
+    display: grid;
+    grid-template-columns: var(--section-title-col) var(--section-content-col);
+    column-gap: var(--section-col-gap);
+    align-items: start;
+  }
+
+  .problem-section>.document-section-heading {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+  }
+
+  .problem-brief,
+  .problem-grid,
+  .problem-reframe {
+    grid-column: 2;
+    max-width: none;
+  }
+}

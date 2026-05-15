@@ -1,0 +1,143 @@
+.document>.outcome-section {
+  max-width: none;
+}
+
+.outcome-section {
+  margin-top: 1rem;
+  padding: 4rem 1.4rem;
+  border: 1px solid #26231f;
+  border-radius: 1.5rem;
+  background: linear-gradient(180deg, #1d1a17, #141210);
+  box-shadow: 0 1.5rem 3rem rgba(18, 16, 14, 0.18);
+}
+
+.outcome-metrics {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid rgba(231, 225, 214, 0.16);
+  border-bottom: 1px solid rgba(231, 225, 214, 0.16);
+}
+
+.outcome-metric {
+  margin: 0;
+  padding: 1rem 0.8rem 1.05rem 0;
+  text-align: center;
+}
+
+.outcome-metric + .outcome-metric {
+  padding-left: 0.8rem;
+  border-left: 1px solid rgba(231, 225, 214, 0.16);
+}
+
+.outcome-metric strong {
+  display: block;
+  font-size: clamp(1.6rem, 4vw, 2.35rem);
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.outcome-metric:nth-child(1) strong {
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.outcome-metric:nth-child(2) strong {
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.outcome-metric:nth-child(3) strong {
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.outcome-metric p {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.94rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.outcome-section>.document-section-heading,
+.outcome-changes .document-eyebrow {
+  color: #ffffff;
+}
+
+.outcome-changes .document-list {
+  margin-top: 0;
+}
+
+.outcome-change-group + .outcome-change-group {
+  margin-top: 1.8rem;
+}
+
+.outcome-changes .document-list li {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+}
+
+.outcome-changes .document-list strong,
+.outcome-changes .document-body strong {
+  color: rgba(255, 255, 255, 0.94);
+  font-weight: 700;
+}
+
+@media (min-width: 640px) {
+  .document>.outcome-section {
+    width: calc(100% + 6rem);
+    margin-left: -3rem;
+    margin-right: -3rem;
+    padding-inline: 3rem;
+  }
+
+  .outcome-section {
+    padding-block: 6rem;
+    display: grid;
+    grid-template-columns: var(--section-title-col) var(--section-content-col);
+    column-gap: var(--section-col-gap);
+    align-items: start;
+  }
+
+  .outcome-section > .document-section-heading {
+    grid-column: 1;
+  }
+
+  .outcome-metrics,
+  .outcome-changes {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 639px) {
+  .document>.outcome-section {
+    width: calc(100% + 3.5rem);
+    margin-left: -1.75rem;
+    margin-right: -1.75rem;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .outcome-metrics {
+    margin-top: 1.8rem;
+  }
+
+  .outcome-metrics + .outcome-changes .document-eyebrow:first-child {
+    margin-top: 2.1rem;
+  }
+
+  .outcome-metric {
+    padding: 0.9rem 0.5rem 0.92rem 0;
+  }
+
+  .outcome-metric + .outcome-metric {
+    padding-left: 0.5rem;
+  }
+
+  .outcome-metric p {
+    font-size: 0.76rem;
+  }
+}

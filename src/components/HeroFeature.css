@@ -1,0 +1,54 @@
+.hero-feature {}
+
+.hero-feature-breakout {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.hero-feature-media {
+  display: block;
+  width: min(var(--measure), calc(100% - 5.5rem));
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  background: #ece9e2;
+  border-radius: 1.5rem;
+  border: 1px solid #e3dfd7;
+  box-shadow: 0 2rem 4.5rem rgba(55, 50, 41, 0.12);
+  cursor: url("/icons/small/magnifier-plus.svg") 12 12, zoom-in;
+}
+
+.hero-feature video,
+.hero-feature img {
+  display: block;
+  width: 100%;
+}
+
+.hero-feature video {
+  height: auto;
+}
+
+.hero-feature img {
+  aspect-ratio: 16 / 10;
+  height: auto;
+  max-height: min(68vh, 44rem);
+  object-fit: cover;
+  object-position: top center;
+}
+
+@media (max-width: 639px) {
+  .hero-feature {
+    padding-bottom: 2.5rem;
+  }
+
+  .hero-feature-media {
+    width: calc(100% - 2.5rem);
+    border-radius: 1.1rem;
+  }
+
+  .hero-feature img {
+    aspect-ratio: 4 / 5;
+    max-height: 72vh;
+  }
+}

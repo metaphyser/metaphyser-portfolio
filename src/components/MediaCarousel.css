@@ -1,0 +1,389 @@
+.media-carousel {
+  --media-shell-width: 100vw;
+  --media-shell-gutter: 0rem;
+  --media-slide-padding: 1.25rem;
+  --media-shadow-buffer: 5rem;
+  --media-shadow-block: 3rem;
+  padding: 4rem 0;
+}
+
+.media-carousel-breakout {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-inline: 0;
+  max-width: none;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.media-carousel-has-controls {
+  padding-bottom: 2rem;
+}
+
+.media-carousel-frame {
+  width: var(--media-shell-width);
+  margin: 0;
+  overflow: visible;
+  touch-action: pan-y;
+  background: transparent;
+  padding-block: 0 var(--media-shadow-block);
+}
+
+.media-carousel-track {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.media-carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  padding-inline: var(--media-slide-padding);
+  min-width: 0;
+}
+
+.media-carousel-slide-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.media-carousel-card {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: #ece9e2;
+  border-radius: 1.5rem;
+  border: 1px solid #e3dfd7;
+  box-shadow: 0 2rem 4.5rem rgba(55, 50, 41, 0.12);
+  cursor: url("/icons/small/magnifier-plus.svg") 12 12, zoom-in;
+}
+
+.media-carousel-card video,
+.media-carousel-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.media-carousel-nav {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.media-carousel-controls {
+  position: relative;
+  z-index: 5;
+  width: min(var(--measure), calc(100vw - 5.5rem));
+  margin: calc(2rem - var(--media-shadow-block)) auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+.media-carousel-arrow {
+  appearance: none;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid #d7d1c7;
+  background-color: #ffffff;
+  color: #1d1d1b;
+  padding: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1.2rem rgba(55, 50, 41, 0.08);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+.media-carousel-arrow-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+.media-carousel-arrow-icon-prev {
+  -webkit-mask-image: url("/icons/mini/left.png");
+  mask-image: url("/icons/mini/left.png");
+}
+
+.media-carousel-arrow-icon-next {
+  -webkit-mask-image: url("/icons/mini/right.png");
+  mask-image: url("/icons/mini/right.png");
+}
+
+.media-carousel-arrow:not(:disabled):hover {
+  transform: translateY(1px);
+  color: #1d1d1b;
+  border-color: #e8e3da;
+  background-color: #f4f1eb;
+  box-shadow: 0 0.22rem 0.55rem rgba(55, 50, 41, 0.06);
+}
+
+.media-carousel-arrow:not(:disabled):active {
+  transform: translateY(1px);
+  border-color: #e2dcd2;
+  background-color: #ede8df;
+  box-shadow: 0 0.16rem 0.4rem rgba(55, 50, 41, 0.05);
+}
+
+.media-carousel-arrow:focus {
+  outline: none;
+}
+
+.media-carousel-arrow:focus-visible {
+  outline: 2px solid rgba(29, 29, 27, 0.28);
+  outline-offset: 3px;
+}
+
+.media-carousel-arrow:disabled {
+  color: #b9b2a8;
+  background-color: #f6f4ef;
+  border-color: #ebe7df;
+  cursor: default;
+  box-shadow: none;
+}
+
+.media-carousel-tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0.2rem;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  transition: transform 140ms ease;
+}
+
+.media-carousel-tab:hover {
+  transform: translateY(-1px);
+}
+
+.media-carousel-dot {
+  display: block;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  background: #ded8cf;
+  transition:
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.media-carousel-tab.is-active .media-carousel-dot {
+  background: #7e776d;
+  transform: scale(1.05);
+}
+
+@media (min-width: 640px) {
+  .media-carousel {
+    --media-shell-width: min(var(--measure), calc(100vw - 5.5rem));
+    --media-shell-gutter: calc((100vw - var(--media-shell-width)) / 2);
+    --media-slide-padding: 1rem;
+    --media-full-card-height: min(calc(var(--media-shell-width) * 0.625), 44rem, 68vh);
+    padding: 6rem 0;
+  }
+
+  .media-carousel-breakout {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-inline: 0;
+    padding-block: 4rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: #fbfaf7;
+  }
+
+  .media-carousel-has-controls {
+    padding-bottom: 2rem;
+  }
+
+  .media-carousel-breakout:not(.media-carousel-has-controls) {
+    padding-bottom: calc(4rem - var(--media-shadow-block));
+  }
+
+  .media-carousel-frame {
+    width: var(--media-shell-width);
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  .media-carousel-slide {
+    display: grid;
+    align-items: center;
+  }
+
+  .media-carousel-slide-inner {
+    width: 100%;
+  }
+
+  .media-carousel-slide-half-pair .media-carousel-slide-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 3rem;
+    padding-inline: 3rem;
+  }
+
+  .media-carousel-slide-full .media-carousel-slide-inner {
+    align-items: center;
+  }
+
+  .media-carousel-slide-half-pair .media-carousel-card {
+    aspect-ratio: 9 / 16;
+    background: #ffffff;
+  }
+
+  .media-carousel-slide-full .media-carousel-card {
+    height: var(--media-full-card-height);
+  }
+
+  .media-carousel-slide-full .media-carousel-card video,
+  .media-carousel-slide-full .media-carousel-card img,
+  .media-carousel-slide-half-pair .media-carousel-card video,
+  .media-carousel-slide-half-pair .media-carousel-card img {
+    aspect-ratio: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+}
+
+@media (max-width: 1099px) {
+  .media-carousel-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .media-carousel {
+    --media-shell-width: 100vw;
+    --media-slide-padding: 1.25rem;
+  }
+
+  .media-carousel {
+    padding: 4rem 0;
+  }
+
+  .media-carousel-breakout {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-inline: 0;
+    padding-block: 4rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: #fbfaf7;
+    overflow: visible;
+  }
+
+  .media-carousel-has-controls {
+    padding-bottom: 2rem;
+  }
+
+  .media-carousel-breakout:not(.media-carousel-has-controls) {
+    padding-bottom: calc(4rem - var(--media-shadow-block));
+  }
+
+  .media-carousel-frame {
+    width: 100vw;
+    margin: 0;
+    overflow: visible;
+    padding-bottom: var(--media-shadow-block);
+  }
+
+  .media-carousel-track {
+    gap: 0;
+  }
+
+  .media-carousel-slide {
+    flex: 0 0 100vw;
+    width: 100vw;
+    padding-inline: var(--media-slide-padding);
+  }
+
+  .media-carousel-slide-inner {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .media-carousel-card {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 1.1rem;
+  }
+
+  .media-carousel-card video,
+  .media-carousel-card img {
+    aspect-ratio: 4 / 5;
+  }
+
+  .media-carousel-slide-full .media-carousel-card {
+    display: flex;
+    align-items: flex-start;
+    aspect-ratio: 4 / 5;
+    background: #ffffff;
+  }
+
+  .media-carousel-slide-full .media-carousel-slide-inner {
+    align-items: center;
+    height: 100%;
+  }
+
+  .media-carousel-slide-full .media-carousel-card img {
+    aspect-ratio: auto;
+    height: auto;
+    object-fit: initial;
+    object-position: top center;
+    background: #ffffff;
+  }
+
+  .media-carousel-slide-half-pair .media-carousel-card video,
+  .media-carousel-slide-half-pair .media-carousel-card img {
+    aspect-ratio: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .media-carousel-slide-half-pair .media-carousel-slide-inner {
+    place-items: stretch;
+  }
+
+  .media-carousel-slide-half-pair .media-carousel-card {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 9 / 16;
+    background: #ffffff;
+  }
+
+  .media-carousel-controls {
+    width: calc(100% - 2.5rem);
+  }
+
+}

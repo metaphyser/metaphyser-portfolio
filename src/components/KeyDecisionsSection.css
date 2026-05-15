@@ -1,0 +1,53 @@
+.document>.key-decisions-section {
+  max-width: 40rem;
+}
+
+.key-decisions-section {
+  border-top: 0;
+  padding-top: 4rem;
+}
+
+.decision-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+}
+
+.decision-item {
+  margin: 0;
+  display: grid;
+  gap: 0;
+}
+
+.decision-copy .document-body,
+.decision-copy {
+  margin-top: 0;
+}
+
+.decision-copy .document-body {
+  max-width: 31rem;
+}
+
+.decision-impact {
+  display: grid;
+  gap: 0.3rem;
+}
+
+@media (min-width: 640px) {
+  .key-decisions-section {
+    display: grid;
+    grid-template-columns: var(--section-title-col) var(--section-content-col);
+    column-gap: var(--section-col-gap);
+    align-items: start;
+  }
+
+  .key-decisions-section > .document-section-heading {
+    grid-column: 1;
+  }
+
+  .decision-list {
+    grid-column: 2;
+  }
+}
