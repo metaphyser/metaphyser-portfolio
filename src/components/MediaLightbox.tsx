@@ -12,8 +12,6 @@ type MediaLightboxProps = {
 
 export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: MediaLightboxProps) {
   const activeItem = items[activeIndex];
-  const previousItem = items[activeIndex === 0 ? items.length - 1 : activeIndex - 1];
-  const nextItem = items[activeIndex === items.length - 1 ? 0 : activeIndex + 1];
   const stageRef = useRef<HTMLDivElement>(null);
   const activeSlideRef = useRef<HTMLDivElement>(null);
   const activeImageRef = useRef<HTMLImageElement>(null);
@@ -33,6 +31,8 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
   const [isZoomed, setIsZoomed] = useState(false);
   const [pendingZoomAlignment, setPendingZoomAlignment] = useState<'left' | 'right' | null>(null);
   const [previewZoomAlignment, setPreviewZoomAlignment] = useState<'left' | 'right' | null>(null);
+  const [isSwipeNavigating, setIsSwipeNavigating] = useState(false);
+  const [mobileTargetIndex, setMobileTargetIndex] = useState<number | null>(null);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [swipeOffset, setSwipeOffset] = useState(0);
   const [viewportFrame, setViewportFrame] = useState(() => ({
@@ -141,6 +141,18 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
     return () => window.cancelAnimationFrame(cleanupFrame);
   }, [activeIndex]);
 
+  useEffect(() => {
+    if (!isSwipeNavigating) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setIsSwipeNavigating(false);
+    }, 180);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [activeIndex, isSwipeNavigating]);
+
   if (!activeItem) {
     return null;
   }
@@ -158,17 +170,12 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
     '--media-lightbox-swipe-x': `${swipeOffset}px`,
     '--media-lightbox-track-x': `calc(-100vw + ${swipeOffset}px)`,
   } as CSSProperties;
-  const mobileTrackStyle = canSwipeMedia
-    ? ({
-        width: `${viewportFrame.width * 3}px`,
-        gridTemplateColumns: `repeat(3, ${viewportFrame.width}px)`,
-        transform: `translate3d(${-viewportFrame.width + swipeOffset}px, 0, 0)`,
-      } as CSSProperties)
-    : ({
-        width: `${viewportFrame.width}px`,
-        gridTemplateColumns: `${viewportFrame.width}px`,
-        transform: 'translate3d(0, 0, 0)',
-      } as CSSProperties);
+  const effectiveMobileIndex = mobileTargetIndex ?? activeIndex;
+  const mobileTrackStyle = {
+    width: `${viewportFrame.width * items.length}px`,
+    gridTemplateColumns: `repeat(${items.length}, ${viewportFrame.width}px)`,
+    transform: `translate3d(${-(effectiveMobileIndex * viewportFrame.width) + swipeOffset}px, 0, 0)`,
+  } as CSSProperties;
 
   const navigatePrevious = () => {
     resetMediaScroll();
@@ -195,21 +202,25 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
   };
 
   const completeSwipe = (direction: 'previous' | 'next') => {
-    const stageWidth = stageRef.current?.getBoundingClientRect().width ?? window.innerWidth;
-    const targetOffset = direction === 'previous' ? stageWidth : -stageWidth;
+    const targetIndex =
+      direction === 'previous'
+        ? activeIndex === 0
+          ? items.length - 1
+          : activeIndex - 1
+        : activeIndex === items.length - 1
+          ? 0
+          : activeIndex + 1;
 
     setIsDragging(false);
-    setSwipeOffset(targetOffset);
+    setIsSwipeNavigating(true);
+    setSwipeOffset(0);
+    setMobileTargetIndex(targetIndex);
     setPendingZoomAlignment(isZoomed ? (direction === 'next' ? 'left' : 'right') : null);
 
     window.setTimeout(() => {
       setIsDragging(true);
-
-      if (direction === 'previous') {
-        navigatePrevious();
-      } else {
-        navigateNext();
-      }
+      setMobileTargetIndex(null);
+      onNavigate(targetIndex);
     }, 170);
   };
 
@@ -421,6 +432,8 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
     const itemKind = getMediaKind(item.src);
 
     if (itemKind === 'video') {
+      const usePreviewMode = options?.preview || isPanViewport;
+
       return (
         <video
           key={item.src}
@@ -432,10 +445,11 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
           ]
             .filter(Boolean)
             .join(' ')}
-          controls={!options?.preview && !isPanViewport}
-          autoPlay={!options?.preview}
-          muted={options?.preview || isPanViewport}
-          loop={options?.preview}
+          controls={!usePreviewMode}
+          autoPlay
+          muted={usePreviewMode}
+          loop={usePreviewMode}
+          preload="auto"
           playsInline
           src={item.src}
         />
@@ -513,22 +527,28 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
           style={mobileStageStyle}
         >
           <div
-            className={['media-lightbox-mobile-track', canSwipeMedia ? 'is-swipeable' : ''].filter(Boolean).join(' ')}
+            className="media-lightbox-mobile-track"
             style={mobileTrackStyle}
           >
-            {canSwipeMedia ? (
-              <div className={getSlideClassName(previousItem, 'media-lightbox-slide-preview media-lightbox-slide-prev media-lightbox-mobile-slide')} aria-hidden="true">
-                {renderMedia(previousItem, { preview: true })}
+            {items.map((item, index) => (
+              <div
+                key={`${item.src}|${item.displaySize ?? 'full'}`}
+                className={getSlideClassName(
+                  item,
+                  [
+                    index === activeIndex ? 'media-lightbox-slide-active' : 'media-lightbox-slide-preview',
+                    'media-lightbox-mobile-slide',
+                    index === activeIndex && isSwipeNavigating ? 'media-lightbox-slide-fade-in' : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' '),
+                )}
+                ref={index === activeIndex ? activeSlideRef : undefined}
+                aria-hidden={index !== activeIndex}
+              >
+                {renderMedia(item, index === activeIndex ? undefined : { preview: true })}
               </div>
-            ) : null}
-            <div className={getSlideClassName(activeItem, 'media-lightbox-slide-active media-lightbox-mobile-slide')} ref={activeSlideRef}>
-              {renderMedia(activeItem)}
-            </div>
-            {canSwipeMedia ? (
-              <div className={getSlideClassName(nextItem, 'media-lightbox-slide-preview media-lightbox-slide-next media-lightbox-mobile-slide')} aria-hidden="true">
-                {renderMedia(nextItem, { preview: true })}
-              </div>
-            ) : null}
+            ))}
           </div>
         </div>
         {items.length > 1 ? (
