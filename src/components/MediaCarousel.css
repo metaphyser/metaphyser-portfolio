@@ -13,7 +13,7 @@
   margin-right: calc(50% - 50vw);
   padding-inline: 0;
   max-width: none;
-  overflow-x: clip;
+  overflow-x: hidden;
   overflow-y: visible;
 }
 
@@ -24,7 +24,8 @@
 .media-carousel-frame {
   width: var(--media-shell-width);
   margin: 0;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
   touch-action: pan-y;
   background: transparent;
   padding-block: 0 var(--media-shadow-block);
@@ -229,7 +230,8 @@
   .media-carousel-frame {
     width: var(--media-shell-width);
     margin: 0 auto;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   .media-carousel-slide {
@@ -312,7 +314,8 @@
   .media-carousel-frame {
     width: 100vw;
     margin: 0;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: visible;
     padding-bottom: var(--media-shadow-block);
   }
 
