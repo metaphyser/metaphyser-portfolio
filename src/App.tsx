@@ -1,11 +1,11 @@
 import { CaseStudyPage } from './components/CaseStudyPage';
-import { SiteFooter } from './components/SiteFooter';
+import { HomePage } from './components/HomePage';
 import { SiteHeader } from './components/SiteHeader';
-import { defaultCaseStudy, getCaseStudyBySlug } from './content/caseStudies';
+import { getCaseStudyBySlug } from './content/caseStudies';
 
 function resolveCaseStudyFromPath(pathname: string) {
-  if (pathname === '/' || pathname === '/case-study' || pathname === '/case-study/') {
-    return defaultCaseStudy;
+  if (pathname === '/case-study' || pathname === '/case-study/') {
+    return getCaseStudyBySlug('made-configurable-products-at-scale') ?? null;
   }
 
   const match = pathname.match(/^\/case-study\/([^/]+)\/?$/);
@@ -17,12 +17,15 @@ function resolveCaseStudyFromPath(pathname: string) {
 }
 
 function App() {
+  const isHomePage = window.location.pathname === '/';
   const caseStudy = resolveCaseStudyFromPath(window.location.pathname);
 
   return (
     <main>
       <SiteHeader />
-      {caseStudy ? (
+      {isHomePage ? (
+        <HomePage />
+      ) : caseStudy ? (
         <CaseStudyPage caseStudy={caseStudy} />
       ) : (
         <div className="page-shell">
@@ -34,8 +37,6 @@ function App() {
           </article>
         </div>
       )}
-
-      <SiteFooter />
     </main>
   );
 }
