@@ -86,11 +86,11 @@
   width: 16px;
   height: 16px;
   background: #1d1d1b;
-  -webkit-mask-image: url("/icons/mini/reveal.png");
+  -webkit-mask-image: url("/icons/mini/reveal.svg");
   -webkit-mask-position: center;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: contain;
-  mask-image: url("/icons/mini/reveal.png");
+  mask-image: url("/icons/mini/reveal.svg");
   mask-position: center;
   mask-repeat: no-repeat;
   mask-size: contain;

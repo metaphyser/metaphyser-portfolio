@@ -1,0 +1,293 @@
+.home-document {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.home-hero-section {
+  border-top: 0;
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.home-hero-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.home-hero-top {
+  display: block;
+}
+
+.home-two-column {
+  display: grid;
+  gap: 0;
+}
+
+.home-hero-heading {
+  display: grid;
+  gap: 0;
+}
+
+.home-hero-intro {
+  margin: 0;
+  color: #7e776d;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: clamp(2.15rem, 4.8vw, 2.55rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.home-hero-kicker {
+  margin-top: 0.35rem;
+  max-width: 8ch;
+}
+
+.home-hero-kicker,
+.home-hero-kicker.hero-title {
+  margin: 0.55rem 0 0;
+  color: var(--ink);
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: clamp(3.7rem, 9.75vw, 4.2rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.22;
+}
+
+.home-hero-title {
+  margin: 0.85rem 0 0;
+  color: var(--ink);
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.home-hero-body {
+  margin-top: 2.4rem;
+  max-width: 31rem;
+}
+
+.home-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.home-hero-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  border: 1px solid #ddd6c9;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.home-hero-action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0.8rem 1.8rem rgba(44, 38, 29, 0.08);
+}
+
+.home-hero-action-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+
+.home-hero-action-label {
+  line-height: 1;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-width: 640px) {
+  .document > .page-section {
+    max-width: none;
+    gap: 4rem;
+  }
+
+  .home-two-column {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3rem;
+  }
+
+  .home-hero-shell {
+    grid-column: 1;
+    max-width: none;
+  }
+
+  .home-hero-section {
+    padding-bottom: 3rem;
+  }
+
+  .home-work-section {
+    padding-top: 3rem;
+    padding-bottom: 0;
+    gap: 3rem;
+  }
+
+  .home-hero-title {
+    margin-top: 0.55rem;
+  }
+
+  .home-hero-body {
+    margin-top: 3rem;
+    max-width: 30rem;
+  }
+
+  .home-hero-actions {
+    margin-top: 2.4rem;
+  }
+
+  .home-hero-action {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+}
+
+.home-work-section {
+  display: grid;
+  gap: 3rem;
+}
+
+.home-work-grid {
+  gap: 3rem;
+}
+
+.home-work-list {
+  display: grid;
+  gap: 0;
+}
+
+.home-work-card {
+  margin: 0;
+}
+
+.home-work-card-link {
+  display: grid;
+  gap: 1.8rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-work-card + .home-work-card {
+  margin-top: 5rem;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.home-work-card-media {
+  overflow: hidden;
+  border: 1px solid #e3dfd7;
+  border-radius: 0.6rem;
+  background: #f3efe8;
+  box-shadow: 0 1.4rem 3rem rgba(55, 50, 41, 0.08);
+}
+
+.home-work-card-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.home-work-card-copy {
+  display: grid;
+  gap: 0;
+  max-width: 32rem;
+}
+
+.home-work-card-meta {
+  margin-top: 1.8rem;
+  margin-bottom: 0;
+}
+
+.home-work-card-title {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: clamp(2.5rem, 6.5vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.34;
+}
+
+.home-work-card-body {
+  margin-top: 0.8rem;
+  max-width: 29rem;
+}
+
+@media (min-width: 640px) {
+  .home-work-section > .document-section-heading {
+    position: static;
+    top: auto;
+  }
+
+  .home-work-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3rem;
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .home-work-card-title {
+    min-height: calc(1.34em * 2);
+  }
+
+  .home-work-card-meta {
+    white-space: nowrap;
+  }
+
+  .home-work-card {
+    align-self: start;
+  }
+
+  .home-work-card.home-work-card-made {
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .home-work-card.home-work-card-xplabs {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .home-work-card.home-work-card-product-ml {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 4rem;
+    padding-top: 0;
+    border-top: 0;
+  }
+}

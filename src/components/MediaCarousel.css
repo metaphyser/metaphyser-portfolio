@@ -126,13 +126,13 @@
 }
 
 .media-carousel-arrow-icon-prev {
-  -webkit-mask-image: url("/icons/mini/left.png");
-  mask-image: url("/icons/mini/left.png");
+  -webkit-mask-image: url("/icons/mini/left.svg");
+  mask-image: url("/icons/mini/left.svg");
 }
 
 .media-carousel-arrow-icon-next {
-  -webkit-mask-image: url("/icons/mini/right.png");
-  mask-image: url("/icons/mini/right.png");
+  -webkit-mask-image: url("/icons/mini/right.svg");
+  mask-image: url("/icons/mini/right.svg");
 }
 
 .media-carousel-arrow:not(:disabled):hover {

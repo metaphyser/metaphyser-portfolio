@@ -8,8 +8,10 @@ export function SiteHeader() {
           JD
         </a>
         <nav className="site-nav" aria-label="Primary">
-          <a href="/">Work</a>
-          <a href="/">About</a>
+          <a href="/">Home</a>
+          <a href="https://www.linkedin.com/in/jo%C3%A3o-duarte-7a4a6910/" target="_blank" rel="noreferrer">
+            LinkedIn
+          </a>
         </nav>
       </div>
     </header>
