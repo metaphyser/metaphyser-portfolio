@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&family=Oswald:wght@200;300;400;500;600;700&family=Quattrocento:wght@400;700&display=swap');
+
 :root {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Karla", "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #1d1d1b;

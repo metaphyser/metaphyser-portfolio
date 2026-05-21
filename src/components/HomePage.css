@@ -5,18 +5,8 @@
 
 .home-hero-section {
   border-top: 0;
-  padding-top: 3.5rem;
-  padding-bottom: 2.5rem;
-}
-
-.document > .home-hero-section {
-  max-width: none;
-  border-bottom: 0;
-  background:
-    radial-gradient(circle at 12% 18%, rgba(0, 230, 149, 0.08), transparent 24%),
-    radial-gradient(circle at 86% 16%, rgba(255, 214, 77, 0.11), transparent 26%),
-    radial-gradient(circle at 50% 100%, rgba(0, 194, 255, 0.08), transparent 30%),
-    linear-gradient(180deg, #faf7f1, #f1ece4);
+  padding-top: 0;
+  padding-bottom: 3rem;
 }
 
 .home-hero-shell {
@@ -24,86 +14,102 @@
   flex-direction: column;
   align-items: stretch;
   width: 100%;
-  max-width: 42rem;
+}
+
+.home-hero-top {
+  display: block;
+}
+
+.home-two-column {
+  display: grid;
+  gap: 0;
+}
+
+.home-hero-heading {
+  display: grid;
+  gap: 0;
+}
+
+.home-hero-intro {
+  margin: 0;
+  color: #7e776d;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: clamp(2.15rem, 4.8vw, 2.55rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .home-hero-kicker {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 0.35rem;
+  max-width: 8ch;
+}
+
+.home-hero-kicker,
+.home-hero-kicker.hero-title {
+  margin: 0.55rem 0 0;
+  color: var(--ink);
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: clamp(3.7rem, 9.75vw, 4.2rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.22;
 }
 
 .home-hero-title {
-  margin-top: 1.1rem;
-  max-width: none;
+  margin: 0.85rem 0 0;
+  color: var(--ink);
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
 }
 
 .home-hero-body {
-  margin-top: 2.1rem;
+  margin-top: 2.4rem;
+  max-width: 31rem;
 }
 
 .home-hero-actions {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 3.15rem;
-  width: 100%;
-  overflow: hidden;
-  border: 1px solid #ddd6c9;
-  border-radius: 1rem;
-  box-shadow: 0 1rem 2.2rem rgba(44, 38, 29, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .home-hero-action {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.7rem;
-  width: 100%;
-  min-height: 3.5rem;
-  padding: 0.95rem 0.7rem;
-  border: 0;
-  border-right: 1px solid #ddd6c9;
-  background: #ffffff;
+  width: 2.7rem;
+  height: 2.7rem;
+  border: 1px solid #ddd6c9;
+  border-radius: 999px;
+  background: #fff;
   color: var(--ink);
-  font-size: 0.95rem;
-  font-weight: 600;
   text-decoration: none;
   transition:
-    border-color 180ms ease,
+    transform 180ms ease,
     box-shadow 180ms ease,
-    transform 180ms ease;
+    border-color 180ms ease;
 }
 
 .home-hero-action:hover {
   transform: translateY(-1px);
-  box-shadow: 0 1.15rem 2.35rem rgba(44, 38, 29, 0.1);
-}
-
-.home-hero-action:last-child {
-  border-right: 0;
+  box-shadow: 0 0.8rem 1.8rem rgba(44, 38, 29, 0.08);
 }
 
 .home-hero-action-icon {
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 24px;
+  height: 24px;
   flex: 0 0 auto;
-}
-
-.home-hero-action-linkedin .home-hero-action-icon {
-  width: 1.72rem;
-  height: 1.72rem;
 }
 
 .home-hero-action-label {
   line-height: 1;
-}
-
-.home-hero-action-label-cv {
-  font-family: "Avenir Next Condensed", "Arial Narrow", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.98rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .sr-only {
@@ -119,37 +125,169 @@
 }
 
 @media (min-width: 640px) {
-  .document > .home-hero-section {
-    width: calc(100% + 6rem);
-    margin-left: -3rem;
-    margin-right: -3rem;
-    padding-inline: 3rem;
-    border-radius: 1.5rem;
+  .document > .page-section {
+    max-width: none;
+    gap: 4rem;
+  }
+
+  .home-two-column {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3rem;
+  }
+
+  .home-hero-shell {
+    grid-column: 1;
+    max-width: none;
   }
 
   .home-hero-section {
-    padding-top: 5.5rem;
-    padding-bottom: 3.75rem;
+    padding-bottom: 3rem;
+  }
+
+  .home-work-section {
+    padding-top: 3rem;
+    padding-bottom: 0;
+    gap: 3rem;
   }
 
   .home-hero-title {
-    margin-top: 1.35rem;
+    margin-top: 0.55rem;
   }
 
   .home-hero-body {
-    margin-top: 2.35rem;
+    margin-top: 3rem;
+    max-width: 30rem;
   }
 
   .home-hero-actions {
-    margin-top: 3.45rem;
+    margin-top: 2.4rem;
+  }
+
+  .home-hero-action {
+    width: 3.4rem;
+    height: 3.4rem;
   }
 }
 
-@media (max-width: 639px) {
-  .document > .home-hero-section {
-    width: calc(100% + 3.5rem);
-    margin-left: -1.75rem;
-    margin-right: -1.75rem;
-    padding-inline: 1.75rem;
+.home-work-section {
+  display: grid;
+  gap: 3rem;
+}
+
+.home-work-grid {
+  gap: 3rem;
+}
+
+.home-work-list {
+  display: grid;
+  gap: 0;
+}
+
+.home-work-card {
+  margin: 0;
+}
+
+.home-work-card-link {
+  display: grid;
+  gap: 1.8rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-work-card + .home-work-card {
+  margin-top: 5rem;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.home-work-card-media {
+  overflow: hidden;
+  border: 1px solid #e3dfd7;
+  border-radius: 0.6rem;
+  background: #f3efe8;
+  box-shadow: 0 1.4rem 3rem rgba(55, 50, 41, 0.08);
+}
+
+.home-work-card-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.home-work-card-copy {
+  display: grid;
+  gap: 0;
+  max-width: 32rem;
+}
+
+.home-work-card-meta {
+  margin-top: 1.8rem;
+  margin-bottom: 0;
+}
+
+.home-work-card-title {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: clamp(2.5rem, 6.5vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.34;
+}
+
+.home-work-card-body {
+  margin-top: 0.8rem;
+  max-width: 29rem;
+}
+
+@media (min-width: 640px) {
+  .home-work-section > .document-section-heading {
+    position: static;
+    top: auto;
+  }
+
+  .home-work-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3rem;
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .home-work-card-title {
+    min-height: calc(1.34em * 2);
+  }
+
+  .home-work-card-meta {
+    white-space: nowrap;
+  }
+
+  .home-work-card {
+    align-self: start;
+  }
+
+  .home-work-card.home-work-card-made {
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .home-work-card.home-work-card-xplabs {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .home-work-card.home-work-card-product-ml {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 4rem;
+    padding-top: 0;
+    border-top: 0;
   }
 }

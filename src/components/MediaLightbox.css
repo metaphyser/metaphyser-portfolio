@@ -203,11 +203,11 @@
   background: currentColor;
   width: 16px;
   height: 16px;
-  -webkit-mask-image: url("/icons/mini/cross.png");
+  -webkit-mask-image: url("/icons/mini/cross.svg");
   -webkit-mask-position: center;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: contain;
-  mask-image: url("/icons/mini/cross.png");
+  mask-image: url("/icons/mini/cross.svg");
   mask-position: center;
   mask-repeat: no-repeat;
   mask-size: contain;
