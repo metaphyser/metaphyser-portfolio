@@ -1,4 +1,6 @@
-.hero-feature {}
+.hero-feature {
+  padding-bottom: 2.5rem;
+}
 
 .hero-feature-breakout {
   width: 100vw;
@@ -8,12 +10,12 @@
 
 .hero-feature-media {
   display: block;
-  width: min(var(--measure), calc(100% - 5.5rem));
+  width: calc(100% - 2.5rem);
   margin: 0 auto;
   padding: 0;
   overflow: hidden;
   background: #ece9e2;
-  border-radius: 1.5rem;
+  border-radius: 1.1rem;
   border: 1px solid #e3dfd7;
   box-shadow: 0 2rem 4.5rem rgba(55, 50, 41, 0.12);
   cursor: url("/icons/small/magnifier-plus.svg") 12 12, zoom-in;
@@ -30,25 +32,25 @@
 }
 
 .hero-feature img {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 5;
   height: auto;
-  max-height: min(68vh, 44rem);
+  max-height: 72vh;
   object-fit: cover;
   object-position: top center;
 }
 
-@media (max-width: 639px) {
+@media (min-width: 640px) {
   .hero-feature {
-    padding-bottom: 2.5rem;
+    padding-bottom: 0;
   }
 
   .hero-feature-media {
-    width: calc(100% - 2.5rem);
-    border-radius: 1.1rem;
+    width: min(var(--measure), calc(100% - 5.5rem));
+    border-radius: 1.5rem;
   }
 
   .hero-feature img {
-    aspect-ratio: 4 / 5;
-    max-height: 72vh;
+    aspect-ratio: 16 / 10;
+    max-height: min(68vh, 44rem);
   }
 }

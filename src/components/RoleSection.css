@@ -1,7 +1,8 @@
 .document>.role-section {
-  max-width: 36rem;
-  margin: 0 auto 0;
-  padding-inline: 1.2rem;
+  max-width: none;
+  width: calc(100% + 3.5rem);
+  margin: 0 -1.75rem 0;
+  padding-inline: 1.75rem;
   border-top: 0;
   border-bottom: 0;
   background:
@@ -92,15 +93,5 @@
   .role-points li {
     margin-left: 0;
     margin-right: 0;
-  }
-}
-
-@media (max-width: 639px) {
-  .document>.role-section {
-    max-width: none;
-    width: calc(100% + 3.5rem);
-    margin-left: -1.75rem;
-    margin-right: -1.75rem;
-    padding-inline: 1.75rem;
   }
 }

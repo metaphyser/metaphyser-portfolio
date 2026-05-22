@@ -1,5 +1,11 @@
 .document>.outcome-section {
   max-width: none;
+  width: calc(100% + 3.5rem);
+  margin-left: -1.75rem;
+  margin-right: -1.75rem;
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
 }
 
 .outcome-section {
@@ -20,22 +26,23 @@
   gap: 0;
   border-top: 1px solid rgba(231, 225, 214, 0.16);
   border-bottom: 1px solid rgba(231, 225, 214, 0.16);
+  margin-top: 1.8rem;
 }
 
 .outcome-metric {
   margin: 0;
-  padding: 1rem 0.8rem 1.05rem 0;
+  padding: 0.9rem 0.5rem 0.92rem 0;
   text-align: center;
 }
 
 .outcome-metric + .outcome-metric {
-  padding-left: 0.8rem;
+  padding-left: 0.5rem;
   border-left: 1px solid rgba(231, 225, 214, 0.16);
 }
 
 .outcome-metric strong {
   display: block;
-  font-size: clamp(1.6rem, 4vw, 2.35rem);
+  font-size: 1.6rem;
   line-height: 0.92;
   letter-spacing: -0.06em;
   color: rgba(255, 255, 255, 0.96);
@@ -56,7 +63,7 @@
 .outcome-metric p {
   margin: 0.35rem 0 0;
   color: rgba(255, 255, 255, 0.66);
-  font-size: 0.94rem;
+  font-size: 0.76rem;
   line-height: 1.4;
   text-align: center;
 }
@@ -85,12 +92,23 @@
   font-weight: 700;
 }
 
+.outcome-metrics + .outcome-changes .document-eyebrow:first-child {
+  margin-top: 2.1rem;
+}
+
 @media (min-width: 640px) {
+  .outcome-metric strong {
+    font-size: 2rem;
+  }
+
   .document>.outcome-section {
     width: calc(100% + 6rem);
     margin-left: -3rem;
     margin-right: -3rem;
     padding-inline: 3rem;
+    border-radius: 1.5rem;
+    border-left: 1px solid #26231f;
+    border-right: 1px solid #26231f;
   }
 
   .outcome-section {
@@ -109,35 +127,26 @@
   .outcome-changes {
     grid-column: 2;
   }
-}
-
-@media (max-width: 639px) {
-  .document>.outcome-section {
-    width: calc(100% + 3.5rem);
-    margin-left: -1.75rem;
-    margin-right: -1.75rem;
-    border-radius: 0;
-    border-left: 0;
-    border-right: 0;
-  }
 
   .outcome-metrics {
-    margin-top: 1.8rem;
-  }
-
-  .outcome-metrics + .outcome-changes .document-eyebrow:first-child {
-    margin-top: 2.1rem;
+    margin-top: 0;
   }
 
   .outcome-metric {
-    padding: 0.9rem 0.5rem 0.92rem 0;
+    padding: 1rem 0.8rem 1.05rem 0;
   }
 
   .outcome-metric + .outcome-metric {
-    padding-left: 0.5rem;
+    padding-left: 0.8rem;
   }
 
   .outcome-metric p {
-    font-size: 0.76rem;
+    font-size: 0.94rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .outcome-metric strong {
+    font-size: 2.35rem;
   }
 }

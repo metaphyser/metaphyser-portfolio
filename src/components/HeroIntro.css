@@ -1,17 +1,17 @@
 .hero-intro {
-  padding-top: 5.5rem;
-  padding-bottom: 3.75rem;
+  padding-top: 3.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .hero-title-block {
-  max-width: 42rem;
+  max-width: none;
 }
 
 .hero-title {
   margin: 0;
   max-width: 11ch;
-  font-family: "Oswald", "Arial Narrow", sans-serif;
-  font-size: clamp(3.8rem, 9.75vw, 5.2rem);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 4.2rem;
   line-height: 1.22;
   letter-spacing: -0.01em;
   font-weight: 400;
@@ -56,18 +56,12 @@
   color: #bdb7ac;
 }
 
-@media (max-width: 639px) {
-  .hero-intro {
-    padding-top: 3.5rem;
-    padding-bottom: 2.5rem;
-  }
-
-  .hero-title {
-    max-width: none;
-  }
-}
-
 @media (min-width: 640px) {
+  .hero-intro {
+    padding-top: 5.5rem;
+    padding-bottom: 3.75rem;
+  }
+
   .hero-title-block {
     max-width: none;
     display: block;
@@ -75,6 +69,7 @@
 
   .hero-title {
     max-width: none;
+    font-size: 4.5rem;
   }
 
   .hero-subtitle {
@@ -85,5 +80,9 @@
 @media (min-width: 1100px) {
   .hero-title-block {
     display: block;
+  }
+
+  .hero-title {
+    font-size: 5.2rem;
   }
 }

@@ -12,6 +12,10 @@
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   padding-inline: 0;
+  padding-block: 4rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: #fbfaf7;
   max-width: none;
   overflow-x: hidden;
   overflow-y: visible;
@@ -22,9 +26,9 @@
 }
 
 .media-carousel-frame {
-  width: var(--media-shell-width);
+  width: 100vw;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: visible;
   overflow-y: visible;
   touch-action: pan-y;
   background: transparent;
@@ -34,12 +38,12 @@
 .media-carousel-track {
   display: flex;
   align-items: stretch;
-  gap: 1rem;
+  gap: 0;
 }
 
 .media-carousel-slide {
-  flex: 0 0 100%;
-  width: 100%;
+  flex: 0 0 100vw;
+  width: 100vw;
   padding-inline: var(--media-slide-padding);
   min-width: 0;
 }
@@ -48,15 +52,19 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
 }
 
 .media-carousel-card {
   display: block;
   width: 100%;
+  max-width: 100%;
   padding: 0;
   overflow: hidden;
   background: #ece9e2;
-  border-radius: 1.5rem;
+  border-radius: 1.1rem;
   border: 1px solid #e3dfd7;
   box-shadow: 0 2rem 4.5rem rgba(55, 50, 41, 0.12);
   cursor: url("/icons/small/magnifier-plus.svg") 12 12, zoom-in;
@@ -66,10 +74,49 @@
 .media-carousel-card img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 5;
   height: 100%;
   object-fit: cover;
   object-position: top center;
+}
+
+.media-carousel-slide-full .media-carousel-card {
+  display: flex;
+  align-items: flex-start;
+  aspect-ratio: 4 / 5;
+  background: #ffffff;
+}
+
+.media-carousel-slide-full .media-carousel-slide-inner {
+  align-items: center;
+  height: 100%;
+}
+
+.media-carousel-slide-full .media-carousel-card img {
+  aspect-ratio: auto;
+  height: auto;
+  object-fit: initial;
+  object-position: top center;
+  background: #ffffff;
+}
+
+.media-carousel-slide-half-pair .media-carousel-card video,
+.media-carousel-slide-half-pair .media-carousel-card img {
+  aspect-ratio: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.media-carousel-slide-half-pair .media-carousel-slide-inner {
+  place-items: stretch;
+}
+
+.media-carousel-slide-half-pair .media-carousel-card {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #ffffff;
 }
 
 .media-carousel-nav {
@@ -82,7 +129,7 @@
 .media-carousel-controls {
   position: relative;
   z-index: 5;
-  width: min(var(--measure), calc(100vw - 5.5rem));
+  width: calc(100% - 2.5rem);
   margin: calc(2rem - var(--media-shadow-block)) auto 0;
   display: flex;
   align-items: center;
@@ -110,6 +157,7 @@
     box-shadow 140ms ease,
     color 140ms ease,
     transform 140ms ease;
+  display: none;
 }
 
 .media-carousel-arrow-icon {
@@ -217,6 +265,7 @@
     border-top: 1px solid var(--rule);
     border-bottom: 1px solid var(--rule);
     background: #fbfaf7;
+    overflow-x: hidden;
   }
 
   .media-carousel-has-controls {
@@ -232,15 +281,21 @@
     margin: 0 auto;
     overflow-x: hidden;
     overflow-y: visible;
+    padding-bottom: var(--media-shadow-block);
   }
 
   .media-carousel-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    padding-inline: var(--media-slide-padding);
     display: grid;
     align-items: center;
   }
 
   .media-carousel-slide-inner {
     width: 100%;
+    max-width: none;
+    margin-inline: 0;
   }
 
   .media-carousel-slide-half-pair .media-carousel-slide-inner {
@@ -257,10 +312,12 @@
   .media-carousel-slide-half-pair .media-carousel-card {
     aspect-ratio: 9 / 16;
     background: #ffffff;
+    border-radius: 1.5rem;
   }
 
   .media-carousel-slide-full .media-carousel-card {
     height: var(--media-full-card-height);
+    border-radius: 1.5rem;
   }
 
   .media-carousel-slide-full .media-carousel-card video,
@@ -272,121 +329,33 @@
     object-fit: cover;
     object-position: top center;
   }
-}
-
-@media (max-width: 1099px) {
-  .media-carousel-arrow {
-    display: none;
-  }
-}
-
-@media (max-width: 639px) {
-  .media-carousel {
-    --media-shell-width: 100vw;
-    --media-slide-padding: 1.25rem;
-  }
-
-  .media-carousel {
-    padding: 4rem 0;
-  }
-
-  .media-carousel-breakout {
-    width: 100vw;
-    max-width: none;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    padding-inline: 0;
-    padding-block: 4rem;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    background: #fbfaf7;
-    overflow: visible;
-  }
-
-  .media-carousel-has-controls {
-    padding-bottom: 2rem;
-  }
-
-  .media-carousel-breakout:not(.media-carousel-has-controls) {
-    padding-bottom: calc(4rem - var(--media-shadow-block));
-  }
-
-  .media-carousel-frame {
-    width: 100vw;
-    margin: 0;
-    overflow-x: hidden;
-    overflow-y: visible;
-    padding-bottom: var(--media-shadow-block);
-  }
-
-  .media-carousel-track {
-    gap: 0;
-  }
-
-  .media-carousel-slide {
-    flex: 0 0 100vw;
-    width: 100vw;
-    padding-inline: var(--media-slide-padding);
-  }
-
-  .media-carousel-slide-inner {
-    width: 100%;
-    max-width: none;
-    margin-inline: 0;
-  }
-
-  .media-carousel-card {
-    width: 100%;
-    max-width: 100%;
-    border-radius: 1.1rem;
-  }
-
-  .media-carousel-card video,
-  .media-carousel-card img {
-    aspect-ratio: 4 / 5;
-  }
 
   .media-carousel-slide-full .media-carousel-card {
-    display: flex;
-    align-items: flex-start;
-    aspect-ratio: 4 / 5;
-    background: #ffffff;
+    display: block;
+    aspect-ratio: auto;
   }
 
   .media-carousel-slide-full .media-carousel-slide-inner {
-    align-items: center;
-    height: 100%;
+    height: auto;
   }
 
   .media-carousel-slide-full .media-carousel-card img {
-    aspect-ratio: auto;
-    height: auto;
-    object-fit: initial;
-    object-position: top center;
-    background: #ffffff;
-  }
-
-  .media-carousel-slide-half-pair .media-carousel-card video,
-  .media-carousel-slide-half-pair .media-carousel-card img {
-    aspect-ratio: auto;
     height: 100%;
     object-fit: cover;
-    object-position: top center;
+    background: transparent;
   }
 
   .media-carousel-slide-half-pair .media-carousel-slide-inner {
-    place-items: stretch;
-  }
-
-  .media-carousel-slide-half-pair .media-carousel-card {
-    width: 100%;
-    max-width: 100%;
-    aspect-ratio: 9 / 16;
-    background: #ffffff;
+    place-items: initial;
   }
 
   .media-carousel-controls {
-    width: calc(100% - 2.5rem);
+    width: min(var(--measure), calc(100vw - 5.5rem));
   }
+}
 
+@media (min-width: 1100px) {
+  .media-carousel-arrow {
+    display: grid;
+  }
 }

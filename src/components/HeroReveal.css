@@ -5,22 +5,23 @@
 }
 
 .hero-reveal {
-  padding-bottom: 0;
+  padding-bottom: 2.5rem;
 }
 
 .hero-reveal-frame {
   --hero-reveal-position: 50%;
   position: relative;
-  width: min(var(--measure), calc(100% - 5.5rem));
+  width: calc(100% - 2.5rem);
   margin: 0 auto;
   overflow: hidden;
   border: 1px solid #e3dfd7;
-  border-radius: 1.5rem;
+  border-radius: 1.1rem;
   background: #ffffff;
   box-shadow: 0 2rem 4.5rem rgba(55, 50, 41, 0.12);
   cursor: ew-resize;
   touch-action: none;
   user-select: none;
+  aspect-ratio: 9 / 16;
 }
 
 .hero-reveal-frame.is-intro {
@@ -30,8 +31,9 @@
 .hero-reveal-image {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  max-height: min(68vh, 44rem);
+  aspect-ratio: auto;
+  height: 100%;
+  max-height: none;
   object-fit: cover;
   object-position: top center;
   pointer-events: none;
@@ -114,20 +116,20 @@
   }
 }
 
-@media (max-width: 639px) {
+@media (min-width: 640px) {
   .hero-reveal {
-    padding-bottom: 2.5rem;
+    padding-bottom: 0;
   }
 
   .hero-reveal-frame {
-    width: calc(100% - 2.5rem);
-    aspect-ratio: 9 / 16;
-    border-radius: 1.1rem;
+    width: min(var(--measure), calc(100% - 5.5rem));
+    aspect-ratio: auto;
+    border-radius: 1.5rem;
   }
 
   .hero-reveal-image {
-    aspect-ratio: auto;
-    height: 100%;
-    max-height: none;
+    aspect-ratio: 16 / 10;
+    height: auto;
+    max-height: min(68vh, 44rem);
   }
 }
