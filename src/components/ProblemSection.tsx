@@ -42,24 +42,26 @@ export function ProblemSection({ title, beginning, middle, end }: ProblemSection
     <PageSection className="problem-section" spacing="compact">
       <SectionHeading>{title}</SectionHeading>
 
-      <SectionFlow className="problem-brief">
-        <EyebrowLabel className="problem-subtitle">{beginning.title}</EyebrowLabel>
-        <SerifStatement>{beginning.statement}</SerifStatement>
-      </SectionFlow>
+      <SectionFlow className="problem-content">
+        <SectionFlow className="problem-brief">
+          <EyebrowLabel className="problem-subtitle">{beginning.title}</EyebrowLabel>
+          <SerifStatement>{beginning.statement}</SerifStatement>
+        </SectionFlow>
 
-      {middle.length > 0 ? (
-        <div className="problem-grid">
-          <div className="problem-panel">
-            {middle.map((group) => (
-              <ProblemList key={group.title} title={group.title} items={group.items} />
-            ))}
+        {middle.length > 0 ? (
+          <div className="problem-grid">
+            <div className="problem-panel">
+              {middle.map((group) => (
+                <ProblemList key={group.title} title={group.title} items={group.items} />
+              ))}
+            </div>
           </div>
-        </div>
-      ) : null}
+        ) : null}
 
-      <SectionFlow className="problem-reframe">
-        <EyebrowLabel className="problem-subtitle">{end.title}</EyebrowLabel>
-        <SerifStatement>{end.statement}</SerifStatement>
+        <SectionFlow className="problem-reframe">
+          <EyebrowLabel className="problem-subtitle">{end.title}</EyebrowLabel>
+          <SerifStatement>{end.statement}</SerifStatement>
+        </SectionFlow>
       </SectionFlow>
     </PageSection>
   );

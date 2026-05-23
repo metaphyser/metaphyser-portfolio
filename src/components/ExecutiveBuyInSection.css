@@ -1,4 +1,5 @@
 .executive-buy-in-flow {
+  min-width: 0;
   gap: 0.5rem;
 }
 
@@ -25,5 +26,6 @@
 
   .executive-buy-in-flow {
     grid-column: 2;
+    min-width: 0;
   }
 }

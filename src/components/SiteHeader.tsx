@@ -29,6 +29,7 @@ const caseStudies = [
 export function SiteHeader() {
   const [isWorkOpen, setIsWorkOpen] = useState(false);
   const menuId = useId();
+  const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
 
   useEffect(() => {
     if (!isWorkOpen) {
@@ -80,23 +81,50 @@ export function SiteHeader() {
           </button>
         </div>
         <div className="site-nav-menu" role="menu" aria-label="Case studies">
-          {caseStudies.map((study) => (
-            <a
-              className="site-nav-card"
-              href={study.href}
-              key={study.href}
-              role="menuitem"
-              onClick={() => {
-                setIsWorkOpen(false);
-              }}
-            >
-              <img className="site-nav-card-image" src={study.imageSrc} alt={study.imageAlt} />
-              <span className="site-nav-card-copy">
-                <span className="site-nav-card-title">{study.title}</span>
-                <span className="site-nav-card-brand">{study.brand}</span>
-              </span>
-            </a>
-          ))}
+          {caseStudies.map((study) => {
+            const studyPath = study.href.replace(/\/$/, '');
+            const isCurrent = currentPath === studyPath;
+
+            const cardContent = (
+              <>
+                <span className="site-nav-card-media">
+                  <img className="site-nav-card-image" src={study.imageSrc} alt={study.imageAlt} />
+                  {isCurrent ? <span className="site-nav-card-status" aria-hidden="true" /> : null}
+                </span>
+                <span className="site-nav-card-copy">
+                  <span className="site-nav-card-title">{study.title}</span>
+                  <span className="site-nav-card-brand">{study.brand}</span>
+                </span>
+              </>
+            );
+
+            if (isCurrent) {
+              return (
+                <div
+                  className="site-nav-card site-nav-card-current"
+                  key={study.href}
+                  role="menuitem"
+                  aria-current="page"
+                >
+                  {cardContent}
+                </div>
+              );
+            }
+
+            return (
+              <a
+                className="site-nav-card"
+                href={study.href}
+                key={study.href}
+                role="menuitem"
+                onClick={() => {
+                  setIsWorkOpen(false);
+                }}
+              >
+                {cardContent}
+              </a>
+            );
+          })}
         </div>
       </aside>
     </>,

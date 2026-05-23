@@ -279,7 +279,7 @@
   .media-carousel-frame {
     width: var(--media-shell-width);
     margin: 0 auto;
-    overflow-x: hidden;
+    overflow-x: visible;
     overflow-y: visible;
     padding-bottom: var(--media-shadow-block);
   }

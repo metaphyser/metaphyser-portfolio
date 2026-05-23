@@ -1,5 +1,5 @@
 .hero-feature {
-  padding-bottom: 2.5rem;
+  padding-bottom: 0;
 }
 
 .hero-feature-breakout {
@@ -40,10 +40,6 @@
 }
 
 @media (min-width: 640px) {
-  .hero-feature {
-    padding-bottom: 0;
-  }
-
   .hero-feature-media {
     width: min(var(--measure), calc(100% - 5.5rem));
     border-radius: 1.5rem;

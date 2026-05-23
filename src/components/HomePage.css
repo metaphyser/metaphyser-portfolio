@@ -125,7 +125,7 @@
 }
 
 @media (min-width: 640px) {
-  .document > .page-section {
+  .home-document > .page-section {
     max-width: none;
     gap: 4rem;
   }

@@ -17,6 +17,16 @@
   box-shadow: 0 1.5rem 3rem rgba(18, 16, 14, 0.18);
 }
 
+.outcome-content {
+  display: grid;
+  gap: 0;
+  min-width: 0;
+}
+
+.outcome-changes {
+  min-width: 0;
+}
+
 .outcome-metrics {
   margin: 0;
   padding: 0;
@@ -123,9 +133,14 @@
     grid-column: 1;
   }
 
-  .outcome-metrics,
-  .outcome-changes {
+  .outcome-content {
     grid-column: 2;
+    min-width: 0;
+  }
+
+  .outcome-section > .outcome-changes {
+    grid-column: 2;
+    min-width: 0;
   }
 
   .outcome-metrics {
