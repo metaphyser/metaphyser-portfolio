@@ -12,6 +12,7 @@ type MediaLightboxProps = {
 
 export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: MediaLightboxProps) {
   const activeItem = items[activeIndex];
+  const previousActiveIndexRef = useRef(activeIndex);
   const stageRef = useRef<HTMLDivElement>(null);
   const activeSlideRef = useRef<HTMLDivElement>(null);
   const activeImageRef = useRef<HTMLImageElement>(null);
@@ -24,7 +25,7 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
     startY: 0,
   });
   const [isPanViewport, setIsPanViewport] = useState(() =>
-    typeof window !== 'undefined' ? window.matchMedia('(max-width: 1366px)').matches : false,
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 1099px)').matches : false,
   );
   const [isClosing, setIsClosing] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -33,6 +34,7 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
   const [previewZoomAlignment, setPreviewZoomAlignment] = useState<'left' | 'right' | null>(null);
   const [isSwipeNavigating, setIsSwipeNavigating] = useState(false);
   const [mobileTargetIndex, setMobileTargetIndex] = useState<number | null>(null);
+  const [desktopFadeFromIndex, setDesktopFadeFromIndex] = useState<number | null>(null);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [swipeOffset, setSwipeOffset] = useState(0);
   const [viewportFrame, setViewportFrame] = useState(() => ({
@@ -46,6 +48,29 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
     setIsClosing(true);
     window.setTimeout(onClose, 180);
   };
+
+  useEffect(() => {
+    if (isPanViewport) {
+      setDesktopFadeFromIndex(null);
+      previousActiveIndexRef.current = activeIndex;
+      return;
+    }
+
+    const previousIndex = previousActiveIndexRef.current;
+
+    if (previousIndex === activeIndex) {
+      return;
+    }
+
+    setDesktopFadeFromIndex(previousIndex);
+    previousActiveIndexRef.current = activeIndex;
+
+    const timeoutId = window.setTimeout(() => {
+      setDesktopFadeFromIndex(null);
+    }, 360);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [activeIndex, isPanViewport]);
 
   const resetMediaScroll = () => {
     stageRef.current?.scrollTo({ top: 0, left: 0 });
@@ -79,7 +104,7 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
   }, [activeIndex, items.length, onClose, onNavigate]);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 1366px)');
+    const mediaQuery = window.matchMedia('(max-width: 1099px)');
     const updateMatch = (event: MediaQueryListEvent) => setIsPanViewport(event.matches);
 
     setIsPanViewport(mediaQuery.matches);
@@ -159,6 +184,8 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
 
   const kind = getMediaKind(activeItem.src);
   const displaySize = activeItem.displaySize ?? 'full';
+  const desktopFadeFromItem =
+    desktopFadeFromIndex !== null && !isPanViewport ? items[desktopFadeFromIndex] : null;
   const canPanImage = kind === 'image' && isPanViewport;
   const canSwipeMedia = isPanViewport && items.length > 1;
   const imageStyle = {
@@ -642,7 +669,46 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
             onLostPointerCapture={handlePointerCancel}
             style={stageStyle}
           >
-            {renderMedia(activeItem)}
+            {desktopFadeFromItem ? (
+              <div
+                className={[
+                  'media-lightbox-desktop-fade-slide',
+                  'media-lightbox-desktop-fade-slide-outgoing',
+                  'media-lightbox-desktop-slide',
+                  `media-lightbox-slide-${getMediaKind(desktopFadeFromItem.src)}`,
+                  `media-lightbox-slide-size-${desktopFadeFromItem.displaySize ?? 'full'}`,
+                  `media-lightbox-desktop-slide-size-${desktopFadeFromItem.displaySize ?? 'full'}`,
+                ].join(' ')}
+                aria-hidden="true"
+              >
+                {renderMedia(desktopFadeFromItem, { preview: true })}
+              </div>
+            ) : null}
+            {desktopFadeFromItem ? (
+              <div
+                className={[
+                  'media-lightbox-desktop-fade-slide',
+                  'media-lightbox-desktop-fade-slide-incoming',
+                  'media-lightbox-desktop-slide',
+                  `media-lightbox-slide-${kind}`,
+                  `media-lightbox-slide-size-${displaySize}`,
+                  `media-lightbox-desktop-slide-size-${displaySize}`,
+                ].join(' ')}
+              >
+                {renderMedia(activeItem)}
+              </div>
+            ) : (
+              <div
+                className={[
+                  'media-lightbox-desktop-slide',
+                  `media-lightbox-slide-${kind}`,
+                  `media-lightbox-slide-size-${displaySize}`,
+                  `media-lightbox-desktop-slide-size-${displaySize}`,
+                ].join(' ')}
+              >
+                {renderMedia(activeItem)}
+              </div>
+            )}
           </div>
         </div>
 
