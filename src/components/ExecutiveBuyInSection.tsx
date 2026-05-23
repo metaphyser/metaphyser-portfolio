@@ -22,11 +22,10 @@ export function ExecutiveBuyInSection({
   return (
     <PageSection className="executive-buy-in-section">
       <SectionHeading>{title}</SectionHeading>
-      {intro ? <BodyText>{intro}</BodyText> : null}
-
       <SectionFlow className="executive-buy-in-flow">
         <SectionFlow className="executive-buy-in-block">
           <EyebrowLabel>Validating the opportunity</EyebrowLabel>
+          {intro ? <BodyText>{intro}</BodyText> : null}
           <DocumentList>
             {validationItems.map((item, index) => (
               <li key={index}>{item}</li>

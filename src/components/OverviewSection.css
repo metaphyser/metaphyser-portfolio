@@ -1,7 +1,11 @@
 .overview-feature {
   display: grid;
   gap: 0;
-  padding: 4rem 0 0;
+  padding: 3rem 0 0;
+}
+
+.overview-feature-no-leading {
+  padding-top: 0;
 }
 
 .overview-copy {
@@ -46,15 +50,9 @@
   margin-top: 1.25rem;
 }
 
-@media (max-width: 639px) {
-  .overview-feature {
-    padding-top: 3rem;
-  }
-}
-
 @media (min-width: 640px) {
   .overview-feature {
-    padding-top: 6rem;
+    padding-top: 4rem;
   }
 
   .overview-copy {

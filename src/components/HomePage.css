@@ -33,9 +33,9 @@
 .home-hero-intro {
   margin: 0;
   color: #7e776d;
-  font-family: "Oswald", "Arial Narrow", sans-serif;
-  font-size: clamp(2.15rem, 4.8vw, 2.55rem);
-  font-weight: 500;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 2.3rem;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1;
 }
@@ -49,18 +49,18 @@
 .home-hero-kicker.hero-title {
   margin: 0.55rem 0 0;
   color: var(--ink);
-  font-family: "Oswald", "Arial Narrow", sans-serif;
-  font-size: clamp(3.7rem, 9.75vw, 4.2rem);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 4rem;
   font-weight: 300;
   letter-spacing: -0.01em;
-  line-height: 1.22;
+  line-height: 1.3;
 }
 
 .home-hero-title {
   margin: 0.85rem 0 0;
   color: var(--ink);
-  font-family: "Oswald", "Arial Narrow", sans-serif;
-  font-size: clamp(1.8rem, 3vw, 2rem);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 2rem;
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1.2;
@@ -125,7 +125,7 @@
 }
 
 @media (min-width: 640px) {
-  .document > .page-section {
+  .home-document > .page-section {
     max-width: none;
     gap: 4rem;
   }
@@ -154,6 +154,19 @@
     margin-top: 0.55rem;
   }
 
+  .home-hero-intro {
+    font-size: 2.35rem;
+  }
+
+  .home-hero-kicker,
+  .home-hero-kicker.hero-title {
+    font-size: 3.8rem;
+  }
+
+  .home-hero-title {
+    font-size: 1.9rem;
+  }
+
   .home-hero-body {
     margin-top: 3rem;
     max-width: 30rem;
@@ -166,6 +179,21 @@
   .home-hero-action {
     width: 3.4rem;
     height: 3.4rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .home-hero-intro {
+    font-size: 2.55rem;
+  }
+
+  .home-hero-kicker,
+  .home-hero-kicker.hero-title {
+    font-size: 4.1rem;
+  }
+
+  .home-hero-title {
+    font-size: 2rem;
   }
 }
 
@@ -230,8 +258,8 @@
 .home-work-card-title {
   margin: 0;
   color: var(--ink);
-  font-family: "Oswald", "Arial Narrow", sans-serif;
-  font-size: clamp(2.5rem, 6.5vw, 2.75rem);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 2.6rem;
   font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1.34;
@@ -256,6 +284,7 @@
   }
 
   .home-work-card-title {
+    font-size: 2.63rem;
     min-height: calc(1.34em * 2);
   }
 
@@ -289,5 +318,11 @@
     margin-top: 4rem;
     padding-top: 0;
     border-top: 0;
+  }
+}
+
+@media (min-width: 1100px) {
+  .home-work-card-title {
+    font-size: 2.75rem;
   }
 }

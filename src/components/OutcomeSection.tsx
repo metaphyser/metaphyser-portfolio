@@ -21,34 +21,41 @@ type OutcomeSectionProps = {
 
 export function OutcomeSection({ title, metrics = [], changes = [], groups }: OutcomeSectionProps) {
   const outcomeGroups = groups ?? [{ title: 'What changed', items: changes }];
+  const hasMetrics = metrics.length > 0;
+
+  const changesContent = (
+    <SectionFlow className="outcome-changes">
+      {outcomeGroups.map((group) => (
+        <SectionFlow className="outcome-change-group" key={group.title}>
+          <EyebrowLabel>{group.title}</EyebrowLabel>
+          <DocumentList>
+            {group.items.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </DocumentList>
+        </SectionFlow>
+      ))}
+    </SectionFlow>
+  );
 
   return (
     <PageSection className="outcome-section">
       <SectionHeading>{title}</SectionHeading>
-
-      {metrics.length > 0 ? (
-        <ul className="outcome-metrics">
-          {metrics.map((metric) => (
-            <li className="outcome-metric" key={metric.label}>
-              <strong>{metric.value}</strong>
-              <p>{metric.label}</p>
-            </li>
-          ))}
-        </ul>
-      ) : null}
-
-      <SectionFlow className="outcome-changes">
-        {outcomeGroups.map((group) => (
-          <SectionFlow className="outcome-change-group" key={group.title}>
-            <EyebrowLabel>{group.title}</EyebrowLabel>
-            <DocumentList>
-              {group.items.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </DocumentList>
-          </SectionFlow>
-        ))}
-      </SectionFlow>
+      {hasMetrics ? (
+        <SectionFlow className="outcome-content">
+          <ul className="outcome-metrics">
+            {metrics.map((metric) => (
+              <li className="outcome-metric" key={metric.label}>
+                <strong>{metric.value}</strong>
+                <p>{metric.label}</p>
+              </li>
+            ))}
+          </ul>
+          {changesContent}
+        </SectionFlow>
+      ) : (
+        changesContent
+      )}
     </PageSection>
   );
 }

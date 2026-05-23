@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&family=Oswald:wght@200;300;400;500;600;700&family=Quattrocento:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Karla:wght@400;500;600;700;800&family=Quattrocento:wght@400;700&display=swap');
 
 :root {
   font-family: "Karla", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -42,12 +42,12 @@ body {
 
 .site-shell,
 .page-shell {
-  width: min(var(--measure), calc(100% - 5.5rem));
+  width: calc(100% - 3.5rem);
   margin: 0 auto;
 }
 
 .document {
-  padding: 5rem 0 7rem;
+  padding: 4rem 0 7rem;
   overflow-wrap: normal;
   word-break: normal;
   -webkit-hyphens: none;
@@ -74,6 +74,15 @@ body {
 }
 
 @media (min-width: 640px) {
+  .site-shell,
+  .page-shell {
+    width: min(var(--measure), calc(100% - 5.5rem));
+  }
+
+  .document {
+    padding-top: 5rem;
+  }
+
   .document>.page-section {
     max-width: none;
   }
@@ -89,14 +98,4 @@ body {
 
 strong {
   color: var(--ink);
-}
-
-@media (max-width: 639px) {
-  .page-shell {
-    width: calc(100% - 3.5rem);
-  }
-
-  .document {
-    padding-top: 4rem;
-  }
 }
