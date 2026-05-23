@@ -1,5 +1,6 @@
 import { CaseStudyPage } from './components/CaseStudyPage';
 import { HomePage } from './components/HomePage';
+import { SiteFooter } from './components/SiteFooter';
 import { SiteHeader } from './components/SiteHeader';
 import { getCaseStudyBySlug } from './content/caseStudies';
 
@@ -37,6 +38,7 @@ function App() {
           </article>
         </div>
       )}
+      <SiteFooter />
     </main>
   );
 }
