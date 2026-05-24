@@ -1,30 +1,7 @@
 import { useEffect, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { caseStudyCards as caseStudies } from '../content/caseStudies';
 import './SiteHeader.css';
-
-const caseStudies = [
-  {
-    brand: 'MADE.com',
-    title: 'Configurable Products at Scale',
-    href: '/case-study/made-configurable-products-at-scale',
-    imageSrc: '/made-pdp/thumb-made-configurator.png',
-    imageAlt: 'MADE.com case study thumbnail',
-  },
-  {
-    brand: 'Experience Labs',
-    title: 'Ecommerce as a System',
-    href: '/case-study/experience-labs-customisable-ecommerce-system',
-    imageSrc: '/xplabs/thumb-xp-labs.png',
-    imageAlt: 'Experience Labs case study thumbnail',
-  },
-  {
-    brand: 'Product ML',
-    title: 'Machine Learning for Player Experience',
-    href: '/case-study/product-ml-making-machine-learning-usable',
-    imageSrc: '/product-ml/01-Product ML Game Health@2x.jpg',
-    imageAlt: 'Product ML case study thumbnail',
-  },
-];
 
 export function SiteHeader() {
   const [isWorkOpen, setIsWorkOpen] = useState(false);

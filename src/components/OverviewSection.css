@@ -4,10 +4,6 @@
   padding: 3rem 0 0;
 }
 
-.overview-feature-no-leading {
-  padding-top: 0;
-}
-
 .overview-copy {
   display: grid;
   grid-template-areas:

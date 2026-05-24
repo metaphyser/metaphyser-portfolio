@@ -1,6 +1,8 @@
+import { getNextCaseStudyCard } from '../content/caseStudies';
 import { useMemo, useState } from 'react';
 import type { CaseStudy } from '../content/caseStudies/types';
 import { ExecutiveBuyInSection } from './ExecutiveBuyInSection';
+import './CaseStudyPage.css';
 import { HeroFeature } from './HeroFeature';
 import { HeroIntro } from './HeroIntro';
 import { HeroReveal } from './HeroReveal';
@@ -8,6 +10,7 @@ import { ImpactStrip } from './ImpactStrip';
 import { KeyDecisionsSection } from './KeyDecisionsSection';
 import { MediaCarousel } from './MediaCarousel';
 import { MediaLightbox } from './MediaLightbox';
+import { NextCaseStudySection } from './NextCaseStudySection';
 import { OverviewSection } from './OverviewSection';
 import { OutcomeSection } from './OutcomeSection';
 import { ProblemSection } from './ProblemSection';
@@ -20,6 +23,7 @@ type CaseStudyPageProps = {
 
 export function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
   const [activeMediaIndex, setActiveMediaIndex] = useState<number | null>(null);
+  const nextCaseStudy = getNextCaseStudyCard(caseStudy.slug);
   const mediaItems = useMemo(() => {
     const items: CaseStudyMediaItem[] = [];
 
@@ -87,7 +91,7 @@ export function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
         />
       ) : null}
       {caseStudy.impact ? (
-        <div className="show-mobile-only">
+        <div className="show-mobile-only case-study-impact-mobile">
           <ImpactStrip items={caseStudy.impact.items} />
         </div>
       ) : null}
@@ -139,6 +143,7 @@ export function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
             changes={caseStudy.outcome.changes}
             groups={caseStudy.outcome.groups}
           />
+          {nextCaseStudy ? <NextCaseStudySection caseStudy={nextCaseStudy} /> : null}
         </article>
       </div>
 

@@ -1,33 +1,7 @@
 import './HomePage.css';
 import { BodyText, EyebrowLabel, SectionHeading } from './DocumentPrimitives';
 import { PageSection } from './PageSection';
-
-const featuredWork = [
-  {
-    brand: 'MADE.com',
-    title: 'Configurable Products at Scale',
-    summary: 'Redesigning PDP & PLP for configuration and product exploration.',
-    href: '/case-study/made-configurable-products-at-scale',
-    imageSrc: '/made-pdp/thumb-made-configurator.png',
-    imageAlt: 'MADE.com case study preview',
-  },
-  {
-    brand: 'Experience Labs',
-    title: 'Ecommerce as a System',
-    summary: 'A multi-brand design system for online retail.',
-    href: '/case-study/experience-labs-customisable-ecommerce-system',
-    imageSrc: '/xplabs/thumb-xp-labs.png',
-    imageAlt: 'Experience Labs case study thumbnail',
-  },
-  {
-    brand: 'Product ML',
-    title: 'Machine Learning for Player Experience',
-    summary: 'A web platform designed for Product Managers and Game Designers to shape the player experience with machine learning.',
-    href: '/case-study/product-ml-making-machine-learning-usable',
-    imageSrc: '/product-ml/01-Product ML Game Health@2x.jpg',
-    imageAlt: 'Product ML case study preview',
-  },
-];
+import { caseStudyCards as featuredWork } from '../content/caseStudies';
 
 export function HomePage() {
   return (
