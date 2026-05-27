@@ -4,6 +4,10 @@ export const experienceLabsCustomisableEcommerceSystem: CaseStudy = {
   slug: 'experience-labs-customisable-ecommerce-system',
   hero: {
     brand: 'Experience Labs',
+    brandLinks: [
+      { label: 'Live Platform', href: 'https://scoochliving.com' },
+      { label: 'Company', href: 'https://www.experience-labs.co.uk/' },
+    ],
     title: 'Ecommerce as a System',
     subtitle: 'A multi-brand design system for online retail',
     reveal: {

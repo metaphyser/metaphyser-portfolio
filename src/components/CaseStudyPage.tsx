@@ -69,6 +69,7 @@ export function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
     <>
       <HeroIntro
         brand={caseStudy.hero.brand}
+        brandLinks={caseStudy.hero.brandLinks}
         title={caseStudy.hero.title}
         subtitle={caseStudy.hero.subtitle}
         meta={caseStudy.hero.meta}

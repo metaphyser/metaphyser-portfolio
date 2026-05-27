@@ -48,12 +48,84 @@
   color: var(--ink);
   font-weight: 800;
   letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
 }
 
 .hero-meta-separator {
   display: inline-block;
   margin-inline: 0.4rem;
   color: #bdb7ac;
+}
+
+.hero-meta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 0.5rem 0.7rem 0.5rem;
+  border: 1px solid rgba(63, 77, 70, 0.18);
+  border-radius: 7px;
+  color: #3f4d46;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 0.3rem 0.8rem rgba(55, 50, 41, 0.06);
+  text-decoration: none;
+  font-size: 0.87rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.hero-meta-tag:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 0.55rem 1.1rem rgba(55, 50, 41, 0.08);
+}
+
+.hero-meta-tag:active {
+  transform: translateY(0);
+  background: rgba(244, 247, 243, 0.96);
+  box-shadow: 0 0.2rem 0.5rem rgba(55, 50, 41, 0.05);
+}
+
+.hero-meta-tag:focus-visible {
+  outline: 0;
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(63, 77, 70, 0.34);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.9),
+    0 0 0 4px rgba(63, 77, 70, 0.14);
+}
+
+.hero-meta-links-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+}
+
+.hero-meta-links-arrow {
+  flex: 0 0 auto;
+}
+
+.hero-meta-links-arrow-mobile {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.hero-meta-links-arrow-tablet {
+  display: none;
+  width: 24px;
+  height: 24px;
 }
 
 @media (min-width: 640px) {
@@ -74,6 +146,23 @@
 
   .hero-subtitle {
     max-width: none;
+  }
+
+  .hero-meta-links-arrow-mobile {
+    display: none;
+  }
+
+  .hero-meta-links-arrow-tablet {
+    display: block;
+  }
+
+  .hero-meta-links-group {
+    gap: 0.9rem;
+  }
+
+  .hero-meta-tag {
+    padding: 0.6rem 0.8rem 0.6rem;
+    font-size: 0.9rem;
   }
 }
 

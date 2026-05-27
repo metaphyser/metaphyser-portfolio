@@ -25,6 +25,10 @@ export type CaseStudy = {
   slug: string;
   hero: {
     brand: string;
+    brandLinks?: Array<{
+      label: string;
+      href: string;
+    }>;
     title: string;
     subtitle?: string;
     meta?: string[];
