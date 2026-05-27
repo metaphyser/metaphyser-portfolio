@@ -12,7 +12,6 @@ export const madeConfigurableProductsAtScale: CaseStudy = {
     brand: 'MADE.com',
     title: 'Configurable Products at Scale',
     subtitle: 'Redesigning PDP & PLP to support configuration and product exploration',
-    meta: ['2018'],
     videoSrc: '/made-pdp/Mobile%20PDP.mov',
     videoSrcDesktop: '/made-pdp/Desktop%20PDP.mov',
   },
