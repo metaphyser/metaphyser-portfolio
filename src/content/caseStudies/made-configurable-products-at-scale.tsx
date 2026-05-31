@@ -12,8 +12,8 @@ export const madeConfigurableProductsAtScale: CaseStudy = {
     brand: 'MADE.com',
     title: 'Configurable Products at Scale',
     subtitle: 'Redesigning PDP & PLP to support configuration and product exploration',
-    videoSrc: '/made-pdp/Mobile%20PDP.mov',
-    videoSrcDesktop: '/made-pdp/Desktop%20PDP.mov',
+    videoSrc: '/made-pdp/Mobile%20PDP.mp4',
+    videoSrcDesktop: '/made-pdp/Desktop%20PDP.mp4',
   },
   impact: {
     items: impactItems,
@@ -104,8 +104,8 @@ export const madeConfigurableProductsAtScale: CaseStudy = {
   },
   media: {
     items: [
-      { src: '/made-pdp/ListingPage%20Sofa.mov', label: 'Listing Page Sofa', displaySize: 'half' },
-      { src: '/made-pdp/ProductPage%20Tubby.mov', label: 'Product Page Tubby', displaySize: 'half' },
+      { src: '/made-pdp/ListingPage%20Sofa.mp4', label: 'Listing Page Sofa', displaySize: 'half' },
+      { src: '/made-pdp/ProductPage%20Tubby.mp4', label: 'Product Page Tubby', displaySize: 'half' },
     ],
   },
   keyDecisions: {

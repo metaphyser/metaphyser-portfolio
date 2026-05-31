@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getMediaKind } from './mediaUtils';
+import { ResponsiveImage } from './ResponsiveImage';
 import './HeroFeature.css';
 
 type HeroFeatureProps = {
@@ -34,7 +35,7 @@ export function HeroFeature({ src, srcDesktop, breakout = false, label = 'Open m
         {activeKind === 'video' ? (
           <video key={activeSrc} autoPlay muted loop playsInline preload="metadata" src={activeSrc} />
         ) : (
-          <img src={activeSrc} alt="" />
+          <ResponsiveImage src={activeSrc} alt="" sizes="100vw" />
         )}
       </button>
     </section>

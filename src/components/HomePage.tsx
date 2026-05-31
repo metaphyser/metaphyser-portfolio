@@ -1,6 +1,7 @@
 import './HomePage.css';
 import { BodyText, EyebrowLabel, SectionHeading } from './DocumentPrimitives';
 import { PageSection } from './PageSection';
+import { ResponsiveImage } from './ResponsiveImage';
 import { caseStudyCards as featuredWork } from '../content/caseStudies';
 
 export function HomePage() {
@@ -61,7 +62,12 @@ export function HomePage() {
               >
                 <a className="home-work-card-link" href={project.href}>
                   <div className="home-work-card-media">
-                    <img className="home-work-card-image" src={project.imageSrc} alt={project.imageAlt} />
+                    <ResponsiveImage
+                      className="home-work-card-image"
+                      src={project.imageSrc}
+                      alt={project.imageAlt}
+                      sizes="(min-width: 640px) 44vw, calc(100vw - 3.5rem)"
+                    />
                   </div>
                   <div className="home-work-card-copy">
                     <h3 className="home-work-card-title">{project.title}</h3>

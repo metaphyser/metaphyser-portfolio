@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { CaseStudyPage } from './components/CaseStudyPage';
 import { HomePage } from './components/HomePage';
 import { SiteFooter } from './components/SiteFooter';
@@ -20,6 +21,20 @@ function resolveCaseStudyFromPath(pathname: string) {
 function App() {
   const isHomePage = window.location.pathname === '/';
   const caseStudy = resolveCaseStudyFromPath(window.location.pathname);
+
+  useEffect(() => {
+    if (isHomePage) {
+      document.title = 'metaphyser';
+      return;
+    }
+
+    if (caseStudy) {
+      document.title = `${caseStudy.hero.title} | metaphyser`;
+      return;
+    }
+
+    document.title = 'Not Found | metaphyser';
+  }, [caseStudy, isHomePage]);
 
   return (
     <main>

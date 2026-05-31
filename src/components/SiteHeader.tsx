@@ -1,6 +1,7 @@
 import { useEffect, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { caseStudyCards as caseStudies } from '../content/caseStudies';
+import { ResponsiveImage } from './ResponsiveImage';
 import './SiteHeader.css';
 
 export function SiteHeader() {
@@ -65,7 +66,12 @@ export function SiteHeader() {
             const cardContent = (
               <>
                 <span className="site-nav-card-media">
-                  <img className="site-nav-card-image" src={study.imageSrc} alt={study.imageAlt} />
+                  <ResponsiveImage
+                    className="site-nav-card-image"
+                    src={study.imageSrc}
+                    alt={study.imageAlt}
+                    sizes="(min-width: 640px) 11rem, 36vw"
+                  />
                   {isCurrent ? <span className="site-nav-card-status" aria-hidden="true" /> : null}
                 </span>
                 <span className="site-nav-card-copy">
