@@ -33,6 +33,7 @@ export type CaseStudy = {
     subtitle?: string;
     meta?: string[];
     videoSrc?: string;
+    videoSrcTablet?: string;
     videoSrcDesktop?: string;
     reveal?: {
       beforeSrc: string;
@@ -78,6 +79,8 @@ export type CaseStudy = {
   media?: {
     items: Array<{
       src: string;
+      srcTablet?: string;
+      srcDesktop?: string;
       label: string;
       displaySize?: 'full' | 'half';
     }>;

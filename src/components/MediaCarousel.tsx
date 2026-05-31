@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { getMediaKind, type CaseStudyMediaItem } from './mediaUtils';
+import { getMediaKind, resolveMediaSrc, type CaseStudyMediaItem, type MediaViewport } from './mediaUtils';
+import { getVideoDimensions } from '../mediaAssets';
 import { ResponsiveImage } from './ResponsiveImage';
 import './MediaCarousel.css';
 
@@ -10,14 +11,25 @@ type MediaCarouselProps = {
   onItemOpen?: (item: CaseStudyMediaItem) => void;
 };
 
-function MediaPreview({ item }: { item: CaseStudyMediaItem }) {
-  const kind = getMediaKind(item.src);
+function MediaPreview({ item, viewport }: { item: CaseStudyMediaItem; viewport: MediaViewport }) {
+  const activeSrc = resolveMediaSrc(item, viewport);
+  const kind = getMediaKind(activeSrc);
+  const videoDimensions = kind === 'video' ? getVideoDimensions(activeSrc) : null;
 
   return kind === 'video' ? (
-    <video autoPlay muted loop playsInline preload="metadata" src={item.src} />
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      src={activeSrc}
+      width={videoDimensions?.width}
+      height={videoDimensions?.height}
+    />
   ) : (
     <ResponsiveImage
-      src={item.src}
+      src={activeSrc}
       alt=""
       sizes={(item.displaySize ?? 'full') === 'half' ? '(min-width: 640px) 22rem, 100vw' : '100vw'}
     />
@@ -55,13 +67,22 @@ function createMediaSlides(items: CaseStudyMediaItem[]) {
 }
 
 export function MediaCarousel({ items, breakout = false, onItemOpen }: MediaCarouselProps) {
-  const [isTabletUp, setIsTabletUp] = useState(() =>
-    typeof window !== 'undefined' ? window.matchMedia('(min-width: 640px)').matches : false,
-  );
+  const [viewport, setViewport] = useState<MediaViewport>(() => {
+    if (typeof window === 'undefined') {
+      return 'mobile';
+    }
+
+    if (window.matchMedia('(min-width: 1100px)').matches) {
+      return 'desktop';
+    }
+
+    return window.matchMedia('(min-width: 640px)').matches ? 'tablet' : 'mobile';
+  });
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, dragFree: false });
   const [activeIndex, setActiveIndex] = useState(0);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
+  const isTabletUp = viewport !== 'mobile';
   const slides = isTabletUp
     ? createMediaSlides(items)
     : items.map((item) => ({
@@ -74,13 +95,25 @@ export function MediaCarousel({ items, breakout = false, onItemOpen }: MediaCaro
   }
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 640px)');
-    const updateMatch = (event: MediaQueryListEvent) => setIsTabletUp(event.matches);
+    const tabletQuery = window.matchMedia('(min-width: 640px)');
+    const desktopQuery = window.matchMedia('(min-width: 1100px)');
+    const updateViewport = () => {
+      if (desktopQuery.matches) {
+        setViewport('desktop');
+        return;
+      }
 
-    setIsTabletUp(mediaQuery.matches);
-    mediaQuery.addEventListener('change', updateMatch);
+      setViewport(tabletQuery.matches ? 'tablet' : 'mobile');
+    };
 
-    return () => mediaQuery.removeEventListener('change', updateMatch);
+    updateViewport();
+    tabletQuery.addEventListener('change', updateViewport);
+    desktopQuery.addEventListener('change', updateViewport);
+
+    return () => {
+      tabletQuery.removeEventListener('change', updateViewport);
+      desktopQuery.removeEventListener('change', updateViewport);
+    };
   }, []);
 
   useEffect(() => {
@@ -137,7 +170,7 @@ export function MediaCarousel({ items, breakout = false, onItemOpen }: MediaCaro
                     aria-label={`Open ${item.label}`}
                     key={`${item.src}:${item.displaySize ?? 'full'}`}
                   >
-                    <MediaPreview item={item} />
+                    <MediaPreview item={item} viewport={viewport} />
                   </button>
                 ))}
               </div>

@@ -2,6 +2,11 @@ type ResponsiveImageConfig = {
   widths: number[];
 };
 
+type VideoDimensions = {
+  width: number;
+  height: number;
+};
+
 const responsiveImageConfigs: Record<string, ResponsiveImageConfig> = {
   '/made-pdp/thumb-made-configurator.png': { widths: [640, 960, 1440] },
   '/xplabs/thumb-xp-labs.png': { widths: [640, 960, 1440] },
@@ -24,6 +29,14 @@ const responsiveImageConfigs: Record<string, ResponsiveImageConfig> = {
   '/xplabs/Icons.png': { widths: [700, 1100, 1400] },
 };
 
+const videoDimensions: Record<string, VideoDimensions> = {
+  '/made-pdp/Mobile PDP-mobile.mp4': { width: 706, height: 1256 },
+  '/made-pdp/Desktop PDP-tablet.mp4': { width: 1440, height: 710 },
+  '/made-pdp/Desktop PDP-desktop.mp4': { width: 1920, height: 946 },
+  '/made-pdp/ListingPage Sofa.mp4': { width: 706, height: 1252 },
+  '/made-pdp/ProductPage Tubby.mp4': { width: 706, height: 1252 },
+};
+
 function withoutExtension(path: string) {
   return path.replace(/\.[^.]+$/, '');
 }
@@ -42,4 +55,8 @@ export function getResponsiveImageData(src: string) {
       .map((width) => `${encodeURI(`${stem}-${width}.webp`)} ${width}w`)
       .join(', '),
   };
+}
+
+export function getVideoDimensions(src: string) {
+  return videoDimensions[src] ?? null;
 }

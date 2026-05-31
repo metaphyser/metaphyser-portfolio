@@ -30,13 +30,11 @@ export function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
     if (caseStudy.hero.videoSrc) {
       items.push({
         src: caseStudy.hero.videoSrc,
+        srcTablet: caseStudy.hero.videoSrcTablet,
+        srcDesktop: caseStudy.hero.videoSrcDesktop,
         label: caseStudy.hero.title,
-        displaySize: caseStudy.hero.videoSrcDesktop ? 'half' : 'full',
+        displaySize: caseStudy.hero.videoSrcTablet || caseStudy.hero.videoSrcDesktop ? 'half' : 'full',
       });
-    }
-
-    if (caseStudy.hero.videoSrcDesktop) {
-      items.push({ src: caseStudy.hero.videoSrcDesktop, label: `${caseStudy.hero.title} desktop`, displaySize: 'full' });
     }
 
     if (caseStudy.hero.reveal) {
@@ -86,9 +84,10 @@ export function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
       ) : caseStudy.hero.videoSrc ? (
         <HeroFeature
           src={caseStudy.hero.videoSrc}
+          srcTablet={caseStudy.hero.videoSrcTablet}
           srcDesktop={caseStudy.hero.videoSrcDesktop}
           label={`Open ${caseStudy.hero.title}`}
-          onOpen={openMedia}
+          onOpen={() => openMedia(mediaItems[0])}
         />
       ) : null}
       {caseStudy.impact ? (

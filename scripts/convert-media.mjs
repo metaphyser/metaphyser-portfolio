@@ -27,10 +27,41 @@ const imageJobs = [
 ];
 
 const videoJobs = [
-  { src: 'public/made-pdp/Mobile PDP.mov' },
-  { src: 'public/made-pdp/Desktop PDP.mov' },
-  { src: 'public/made-pdp/ListingPage Sofa.mov' },
-  { src: 'public/made-pdp/ProductPage Tubby.mov' },
+  {
+    src: 'public/made-pdp/Mobile PDP.mov',
+    out: 'public/made-pdp/Mobile PDP-mobile.mp4',
+    poster: 'public/made-pdp/Mobile PDP-poster.jpg',
+    vf: null,
+    crf: '19',
+  },
+  {
+    src: 'public/made-pdp/Desktop PDP.mov',
+    out: 'public/made-pdp/Desktop PDP-tablet.mp4',
+    poster: 'public/made-pdp/Desktop PDP-poster.jpg',
+    vf: 'scale=1440:-2:flags=lanczos',
+    crf: '18',
+  },
+  {
+    src: 'public/made-pdp/Desktop PDP.mov',
+    out: 'public/made-pdp/Desktop PDP-desktop.mp4',
+    poster: null,
+    vf: 'scale=1920:-2:flags=lanczos',
+    crf: '18',
+  },
+  {
+    src: 'public/made-pdp/ListingPage Sofa.mov',
+    out: 'public/made-pdp/ListingPage Sofa.mp4',
+    poster: 'public/made-pdp/ListingPage Sofa-poster.jpg',
+    vf: null,
+    crf: '19',
+  },
+  {
+    src: 'public/made-pdp/ProductPage Tubby.mov',
+    out: 'public/made-pdp/ProductPage Tubby.mp4',
+    poster: 'public/made-pdp/ProductPage Tubby-poster.jpg',
+    vf: null,
+    crf: '19',
+  },
 ];
 
 function withoutExtension(filePath) {
@@ -67,9 +98,8 @@ for (const job of imageJobs) {
 
 for (const job of videoJobs) {
   const input = join(root, job.src);
-  const stem = withoutExtension(input);
-  const output = `${stem}.mp4`;
-  const poster = `${stem}-poster.jpg`;
+  const output = join(root, job.out);
+  const poster = job.poster ? join(root, job.poster) : null;
 
   mkdirSync(dirname(output), { recursive: true });
 
@@ -77,26 +107,41 @@ for (const job of videoJobs) {
     '-y',
     '-i',
     input,
-    '-map',
-    '0:v:0',
-    '-c:v',
-    'copy',
     '-an',
+    '-c:v',
+    'libx264',
+    '-preset',
+    'slow',
+    '-crf',
+    job.crf,
+    '-pix_fmt',
+    'yuv420p',
     '-movflags',
     '+faststart',
+    '-color_primaries',
+    'bt709',
+    '-color_trc',
+    'bt709',
+    '-colorspace',
+    'bt709',
+    ...(job.vf ? ['-vf', job.vf] : []),
     output,
   ]);
 
-  run('ffmpeg', [
-    '-y',
-    '-ss',
-    '00:00:01',
-    '-i',
-    input,
-    '-frames:v',
-    '1',
-    '-q:v',
-    '2',
-    poster,
-  ]);
+  if (poster) {
+    run('ffmpeg', [
+      '-y',
+      '-ss',
+      '00:00:01',
+      '-i',
+      input,
+      '-frames:v',
+      '1',
+      '-update',
+      '1',
+      '-q:v',
+      '2',
+      poster,
+    ]);
+  }
 }
