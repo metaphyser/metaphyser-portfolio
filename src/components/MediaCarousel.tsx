@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { getMediaKind, type CaseStudyMediaItem } from './mediaUtils';
+import { ResponsiveImage } from './ResponsiveImage';
 import './MediaCarousel.css';
 
 type MediaCarouselProps = {
@@ -15,7 +16,11 @@ function MediaPreview({ item }: { item: CaseStudyMediaItem }) {
   return kind === 'video' ? (
     <video autoPlay muted loop playsInline preload="metadata" src={item.src} />
   ) : (
-    <img src={item.src} alt="" />
+    <ResponsiveImage
+      src={item.src}
+      alt=""
+      sizes={(item.displaySize ?? 'full') === 'half' ? '(min-width: 640px) 22rem, 100vw' : '100vw'}
+    />
   );
 }
 

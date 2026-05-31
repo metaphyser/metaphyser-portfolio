@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type PointerEvent, type WheelEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { getMediaKind, type CaseStudyMediaItem } from './mediaUtils';
+import { ResponsiveImage } from './ResponsiveImage';
 import './MediaLightbox.css';
 
 type MediaLightboxProps = {
@@ -484,7 +485,7 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
     }
 
     const image = (
-      <img
+      <ResponsiveImage
         ref={!options?.preview ? activeImageRef : undefined}
         className={
           canPanImage && (!options?.preview || isZoomed)
@@ -492,6 +493,7 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
             : undefined
         }
         src={item.src}
+        sizes="100vw"
         alt={options?.preview ? '' : item.label}
         draggable={false}
         style={

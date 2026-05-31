@@ -1,4 +1,5 @@
 import { useState, type CSSProperties, type PointerEvent } from 'react';
+import { getResponsiveImageData } from '../mediaAssets';
 import './HeroReveal.css';
 
 type HeroRevealProps = {
@@ -20,6 +21,10 @@ export function HeroReveal({
 }: HeroRevealProps) {
   const [position, setPosition] = useState(50);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const afterDesktopAsset = getResponsiveImageData(afterSrc);
+  const afterMobileAsset = afterSrcMobile ? getResponsiveImageData(afterSrcMobile) : null;
+  const beforeDesktopAsset = getResponsiveImageData(beforeSrc);
+  const beforeMobileAsset = beforeSrcMobile ? getResponsiveImageData(beforeSrcMobile) : null;
 
   const updatePosition = (event: PointerEvent<HTMLDivElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect();
@@ -46,12 +51,32 @@ export function HeroReveal({
         style={{ '--hero-reveal-position': `${position}%` } as CSSProperties}
       >
         <picture>
-          {afterSrcMobile ? <source media="(max-width: 639px)" srcSet={afterSrcMobile} /> : null}
+          {afterSrcMobile ? (
+            <source
+              media="(max-width: 639px)"
+              type="image/webp"
+              srcSet={afterMobileAsset?.webpSrcSet ?? afterSrcMobile}
+              sizes="100vw"
+            />
+          ) : null}
+          {afterDesktopAsset?.webpSrcSet ? (
+            <source type="image/webp" srcSet={afterDesktopAsset.webpSrcSet} sizes="100vw" />
+          ) : null}
           <img className="hero-reveal-image" src={afterSrc} alt={afterLabel} draggable={false} />
         </picture>
         <div className="hero-reveal-before" aria-hidden="true">
           <picture>
-            {beforeSrcMobile ? <source media="(max-width: 639px)" srcSet={beforeSrcMobile} /> : null}
+            {beforeSrcMobile ? (
+              <source
+                media="(max-width: 639px)"
+                type="image/webp"
+                srcSet={beforeMobileAsset?.webpSrcSet ?? beforeSrcMobile}
+                sizes="100vw"
+              />
+            ) : null}
+            {beforeDesktopAsset?.webpSrcSet ? (
+              <source type="image/webp" srcSet={beforeDesktopAsset.webpSrcSet} sizes="100vw" />
+            ) : null}
             <img className="hero-reveal-image" src={beforeSrc} alt="" draggable={false} />
           </picture>
         </div>
