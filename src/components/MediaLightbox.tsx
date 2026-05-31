@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type PointerEvent, type WheelEvent } from 'react';
 import { createPortal } from 'react-dom';
-import { getMediaKind, type CaseStudyMediaItem } from './mediaUtils';
+import { getMediaKind, resolveMediaSrc, type CaseStudyMediaItem, type MediaViewport } from './mediaUtils';
+import { getVideoDimensions } from '../mediaAssets';
 import { ResponsiveImage } from './ResponsiveImage';
 import './MediaLightbox.css';
 
@@ -28,6 +29,17 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
   const [isPanViewport, setIsPanViewport] = useState(() =>
     typeof window !== 'undefined' ? window.matchMedia('(max-width: 1099px)').matches : false,
   );
+  const [viewport, setViewport] = useState<MediaViewport>(() => {
+    if (typeof window === 'undefined') {
+      return 'mobile';
+    }
+
+    if (window.matchMedia('(min-width: 1100px)').matches) {
+      return 'desktop';
+    }
+
+    return window.matchMedia('(min-width: 640px)').matches ? 'tablet' : 'mobile';
+  });
   const [isClosing, setIsClosing] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -106,12 +118,29 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 1099px)');
+    const tabletQuery = window.matchMedia('(min-width: 640px)');
+    const desktopQuery = window.matchMedia('(min-width: 1100px)');
     const updateMatch = (event: MediaQueryListEvent) => setIsPanViewport(event.matches);
+    const updateViewport = () => {
+      if (desktopQuery.matches) {
+        setViewport('desktop');
+        return;
+      }
+
+      setViewport(tabletQuery.matches ? 'tablet' : 'mobile');
+    };
 
     setIsPanViewport(mediaQuery.matches);
+    updateViewport();
     mediaQuery.addEventListener('change', updateMatch);
+    tabletQuery.addEventListener('change', updateViewport);
+    desktopQuery.addEventListener('change', updateViewport);
 
-    return () => mediaQuery.removeEventListener('change', updateMatch);
+    return () => {
+      mediaQuery.removeEventListener('change', updateMatch);
+      tabletQuery.removeEventListener('change', updateViewport);
+      desktopQuery.removeEventListener('change', updateViewport);
+    };
   }, []);
 
   useEffect(() => {
@@ -457,10 +486,12 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
   };
 
   const renderMedia = (item: CaseStudyMediaItem, options?: { preview?: boolean }) => {
-    const itemKind = getMediaKind(item.src);
+    const activeSrc = resolveMediaSrc(item, viewport);
+    const itemKind = getMediaKind(activeSrc);
 
     if (itemKind === 'video') {
       const usePreviewMode = options?.preview || isPanViewport;
+      const videoDimensions = getVideoDimensions(activeSrc);
 
       return (
         <video
@@ -479,7 +510,9 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
           loop={usePreviewMode}
           preload="auto"
           playsInline
-          src={item.src}
+          src={activeSrc}
+          width={videoDimensions?.width}
+          height={videoDimensions?.height}
         />
       );
     }
@@ -492,7 +525,7 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
             ? 'media-lightbox-pan-media'
             : undefined
         }
-        src={item.src}
+        src={activeSrc}
         sizes="100vw"
         alt={options?.preview ? '' : item.label}
         draggable={false}
@@ -512,7 +545,7 @@ export function MediaLightbox({ items, activeIndex, onClose, onNavigate }: Media
   const getSlideClassName = (item: CaseStudyMediaItem, extraClassName?: string) =>
     [
       'media-lightbox-slide',
-      `media-lightbox-slide-${getMediaKind(item.src)}`,
+      `media-lightbox-slide-${getMediaKind(resolveMediaSrc(item, viewport))}`,
       `media-lightbox-slide-size-${item.displaySize ?? 'full'}`,
       extraClassName,
     ]
